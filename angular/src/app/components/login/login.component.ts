@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  logoPath = '/assets/napp-svg-blue.svg';
+
   constructor() { }
 
   ngOnInit() {

@@ -1,5 +1,12 @@
-<nav>
-  <a routerLink="/login">Dashboard</a>
-  <a routerLink="/register">Articles</a>
-</nav>
-<router-outlet></router-outlet>
+<div class="body">
+
+</div>
+<mat-sidenav-container class="container">
+  <mat-sidenav id="sidenav" #sidenav mode="over">
+      Sidenav content
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header *ngIf="showHead"></app-header>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
