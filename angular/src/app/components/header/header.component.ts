@@ -13,6 +13,5 @@ export class HeaderComponent {
 
   toggleSidenav() {
     this.sidenavService.toggle();
-    console.log('Clicked');
   }
 }

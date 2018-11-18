@@ -8,3 +8,10 @@
   background-color: $nightblue;
   margin-top: 50px;
 }
+* {
+  font-family: 'Open Sans', sans-serif;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition:    all 0.2s ease;
+  -ms-transition:     all 0.2s ease;
+  -o-transition:      all 0.2s ease;
+ }

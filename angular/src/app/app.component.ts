@@ -22,6 +22,8 @@ export class AppComponent implements OnInit {
       if (event instanceof NavigationStart) {
         if (event['url'] === '/login') {
           this.showHead = false;
+        } else if (event['url'] === '/register') {
+          this.showHead = false;
         } else {
           this.showHead = true;
         }

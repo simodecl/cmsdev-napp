@@ -29,7 +29,8 @@ import { SidenavService } from './services/sidenav-service.service';
     HttpClientModule,
     HttpModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   providers: [SidenavService],
   bootstrap: [AppComponent]
