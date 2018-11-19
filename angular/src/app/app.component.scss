@@ -6,17 +6,21 @@
 
 * {
   font-family: 'Open Sans', sans-serif;
+  transition: all 0.2s ease;
   -webkit-transition: all 0.2s ease;
-  -moz-transition:    all 0.2s ease;
-  -ms-transition:     all 0.2s ease;
-  -o-transition:      all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
  }
 
  #sidenav {
-  background-color: $darkblue;
+  background-color: $blue;
   margin-top: 44px;
+  width: 250px;
+  color: $white;
+  transition: none;
   -webkit-transition: none;
-  -moz-transition:    none;
-  -ms-transition:     none;
-  -o-transition:      none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
 }
