@@ -1,1 +1,14 @@
 @import '../../variables.scss';
+
+.header {
+  color: $white;
+  background-color: $blue;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.menu-icon {
+  margin-right: 20px;
+}
