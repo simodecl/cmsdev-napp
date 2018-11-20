@@ -4,38 +4,25 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, of, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  public errors: string = null;
-  constructor(
-    private http: HttpClient
-    ) {}
+export class ImageService {
+  errors = null;
 
-  public login(data): Observable<any> {
-    return this.http.post(environment.tokenURL, data)
-    .pipe(
-      catchError(this.handleError) // then handle the error
-    );
-  }
+  constructor(private http: HttpClient) { }
 
-  public register(data): Observable<any> {
-    return this.http.post(`${environment.apiURL}/users/register?${data}`, null)
-    .pipe(
-      catchError(this.handleError) // then handle the error
-    );
-  }
-
-  public getCurrentUser(): Observable<any> {
+  public upload(data): Observable<any> {
     const token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
+        'Content-Disposition': 'attachment; filename=testimage.png',
         'Authorization': `Bearer ${token}`
       })
     };
 
-    return this.http.get(`${environment.apiURL}/users/me`, httpOptions)
+    return this.http.post(`${environment.apiURL}/media`, data, httpOptions)
     .pipe(
       catchError(this.handleError) // then handle the error
     );
@@ -51,22 +38,5 @@ export class AuthService {
     }
 
     return throwError(this.errors);
-  }
-
-  getToken(): string {
-    const token = localStorage.getItem('token');
-
-    return token;
-  }
-
-  public isAuthenticated(): boolean {
-
-    const token = localStorage.getItem('token');
-
-    if (token) {
-      return true;
-    } else {
-      return false;
-    }
   }
 }
