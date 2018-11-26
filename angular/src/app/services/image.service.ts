@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { catchError, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -17,7 +18,7 @@ export class ImageService {
     const token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Disposition': 'attachment; filename=testimage.png',
+        'Content-Disposition': 'attachment; filename=profile.png',
         'Authorization': `Bearer ${token}`
       })
     };
@@ -26,6 +27,26 @@ export class ImageService {
     .pipe(
       catchError(this.handleError) // then handle the error
     );
+  }
+
+  public uploadAvatar(avatar): Observable<any> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    };
+    const postData = {
+      'meta': {
+        'avatar': `${avatar.id}`
+      }
+    };
+    return this.http.post(`${environment.apiURL}/users/me`, postData, httpOptions)
+    .pipe(
+      catchError(this.handleError) // then handle the error
+    );
+
   }
 
   private handleError(errorResponse: HttpErrorResponse) {

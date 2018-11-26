@@ -36,6 +36,11 @@ export class HomeComponent implements OnInit {
     this.imageService.upload(formData).subscribe(result => {
       // Handle result
       console.log(result);
+      this.imageService.uploadAvatar(result).subscribe(res => {
+        console.log(res);
+      }, err => {
+        console.error(err);
+      });
     },
     error => {
       console.error(error);
