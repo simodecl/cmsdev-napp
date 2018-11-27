@@ -9,12 +9,12 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ImageService {
+export class SettingsService {
   errors = null;
 
   constructor(private http: HttpClient) { }
 
-  public upload(data): Observable<any> {
+  public uploadFile(data): Observable<any> {
     const token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
@@ -29,7 +29,7 @@ export class ImageService {
     );
   }
 
-  public uploadAvatar(avatar): Observable<any> {
+  public updateSettings(data): Observable<any> {
     const token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
@@ -37,16 +37,10 @@ export class ImageService {
         'Authorization': `Bearer ${token}`
       })
     };
-    const postData = {
-      'meta': {
-        'avatar': `${avatar.id}`
-      }
-    };
-    return this.http.post(`${environment.apiURL}/users/me`, postData, httpOptions)
+    return this.http.post(`${environment.apiURL}/users/me`, data, httpOptions)
     .pipe(
       catchError(this.handleError) // then handle the error
     );
-
   }
 
   private handleError(errorResponse: HttpErrorResponse) {

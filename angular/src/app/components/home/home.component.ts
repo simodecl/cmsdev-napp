@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ImageService } from 'src/app/services/image.service';
+import { SettingsService } from 'src/app/services/settings.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HomeComponent implements OnInit {
   selectedFile: File;
 
-  constructor(private imageService: ImageService, private authService: AuthService) { }
+  constructor(private settingsService: SettingsService, private authService: AuthService) { }
 
   ngOnInit() {
     this.authService.getCurrentUser().subscribe(result => {
@@ -30,13 +30,13 @@ export class HomeComponent implements OnInit {
     console.log(this.selectedFile);
   }
 
-  onUpload() {
+  updateSettings() {
     const formData = new FormData();
     formData.append('file', this.selectedFile);
-    this.imageService.upload(formData).subscribe(result => {
+    this.settingsService.uploadFile(formData).subscribe(result => {
       // Handle result
       console.log(result);
-      this.imageService.uploadAvatar(result).subscribe(res => {
+      this.settingsService.updateSettings(result).subscribe(res => {
         console.log(res);
       }, err => {
         console.error(err);
