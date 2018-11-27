@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   public register(data): Observable<any> {
-    return this.http.post(`${environment.apiURL}/users/register?${data}`, null)
+    return this.http.post(`${environment.apiURL}/users/register`, data)
     .pipe(
       catchError(this.handleError) // then handle the error
     );

@@ -11,6 +11,8 @@ export class RegisterComponent implements OnInit {
 
   logoPath = '/assets/napp-logo-blue.png';
   username: '';
+  firstname: '';
+  lastname: '';
   email: '';
   password: '';
   password2: '';
@@ -27,13 +29,19 @@ export class RegisterComponent implements OnInit {
   register() {
     const data = {
       username: this.username,
+      firstname: this.firstname,
+      lastname: this.lastname,
       email: this.email,
       password: this.password,
     };
-    const urlParameters = Object.entries(data).map(e => e.join('=')).join('&');
+    // const formData = new FormData();
+    // for (const key of Object.keys(data)) {
+    //   formData.append(key, data[key]);
+    // }
 
     if (this.password === this.password2) {
-      this.authService.register(urlParameters).subscribe(result => {
+      console.log(data);
+      this.authService.register(data).subscribe(result => {
         // Handle result
         console.log(result);
         this.router.navigate(['login']);
