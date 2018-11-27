@@ -13,6 +13,7 @@ import { HeaderComponent } from './components/header/header.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
 import { SidenavService } from './services/sidenav-service.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,10 @@ import { SidenavService } from './services/sidenav-service.service';
     MaterialModule,
     FormsModule
   ],
-  providers: [SidenavService],
+  providers: [
+    SidenavService,
+    AuthGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
