@@ -1,9 +1,23 @@
 <div class="main">
-  <p>gachibass</p>
+  <p>test</p>
   <input
   style="display: none"
   type="file" (change)="onFileChanged($event)"
   #fileInput>
 <button (click)="fileInput.click()">Select File</button>
-<button (click)="updateSettings()">Update</button>
+<form class="form-login" (ngSubmit)="updateSettings()">
+  <div class="form-group">
+    <label for="school">School</label><br>
+    <input name="school" [(ngModel)]="school">
+  </div>
+  <div class="form-group">
+    <label for="goaldate">Slaapdoel datum</label><br>
+    <input name="goaldate" [(ngModel)]="goaldate">
+  </div>
+  <div class="form-group">
+    <label for="goalamount">Slaapdoel hoeveelheid</label><br>
+    <input name="goalamount" [(ngModel)]="goalamount">
+  </div>
+  <button type="submit" class="button-update">Bijwerken</button>
+</form>
 </div>

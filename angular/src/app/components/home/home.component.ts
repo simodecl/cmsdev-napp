@@ -9,20 +9,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HomeComponent implements OnInit {
   selectedFile: File;
+  school = '';
+  goaldate = '';
+  goalamount = '';
 
   constructor(private settingsService: SettingsService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.authService.getCurrentUser().subscribe(result => {
-      // Handle result
-      console.log(result);
-    },
-    error => {
-      console.error(error);
-    },
-    () => {
-      // Route to new page
-    });
   }
 
   onFileChanged(event) {
@@ -33,10 +26,19 @@ export class HomeComponent implements OnInit {
   updateSettings() {
     const formData = new FormData();
     formData.append('file', this.selectedFile);
-    this.settingsService.uploadFile(formData).subscribe(result => {
+    this.settingsService.uploadFile(formData).subscribe(image => {
       // Handle result
-      console.log(result);
-      this.settingsService.updateSettings(result).subscribe(res => {
+      console.log(image);
+
+      const settings = {
+        'meta': {
+          'avatar': `${image.id}`,
+          'school': this.school,
+          'goaldate': this.goaldate.split('/').reverse().join(''),
+          'goalamount': this.goalamount,
+        }
+      };
+      this.settingsService.updateSettings(settings).subscribe(res => {
         console.log(res);
       }, err => {
         console.error(err);
