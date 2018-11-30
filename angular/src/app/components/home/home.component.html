@@ -5,7 +5,7 @@
   type="file" (change)="onFileChanged($event)"
   #fileInput>
 <button (click)="fileInput.click()">Select File</button>
-<form class="form-login" (ngSubmit)="updateSettings()">
+<form class="form-settings" (ngSubmit)="updateSettings()">
   <div class="form-group">
     <label for="school">School</label><br>
     <input name="school" [(ngModel)]="school">

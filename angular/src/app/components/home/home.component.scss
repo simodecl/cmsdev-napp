@@ -5,3 +5,29 @@
   width: 100vw;
   background-color: $lightblue;
 }
+
+.form-settings {
+  width: 300px;
+  margin: 0 auto;
+}
+.form-group {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 15px;
+  color: $white;
+  background-color: $blue;
+  border: solid 1px $darkblue;
+  border-radius: 2px;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.form-group label {
+  color: $blue;
+  font-size: 0.75rem;
+}
