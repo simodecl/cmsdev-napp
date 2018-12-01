@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
@@ -14,6 +14,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
 import { SidenavService } from './services/sidenav-service.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { ProfilesComponent } from './components/profiles/profiles.component';
+import { ProfileDetailComponent } from './components/profiles/profile-detail/profile-detail.component';
+import { ProfileSettingsComponent } from './components/profiles/profile-settings/profile-settings.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { AuthGuardService } from './services/auth-guard.service';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    ProfilesComponent,
+    ProfileDetailComponent,
+    ProfileSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,8 @@ import { AuthGuardService } from './services/auth-guard.service';
     HttpModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     SidenavService,
