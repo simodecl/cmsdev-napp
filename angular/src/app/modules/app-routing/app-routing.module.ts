@@ -8,13 +8,15 @@ import { ProfileSettingsComponent } from 'src/app/components/profiles/profile-se
 import { ProfileDetailComponent } from 'src/app/components/profiles/profile-detail/profile-detail.component';
 import { ProfilesComponent } from 'src/app/components/profiles/profiles.component';
 
+import { AuthGuardService as AuthGuard } from './../../services/auth-guard.service';
+
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'profiles', component: ProfilesComponent },
-  { path: 'profile', component: ProfileDetailComponent },
-  { path: 'profile/settings', component: ProfileSettingsComponent },
+  { path: 'register', component: RegisterComponent},
+  { path: 'profile/:id', component: ProfileDetailComponent, canActivate: [AuthGuard] },
+  { path: 'profile/:id/settings', component: ProfileSettingsComponent, canActivate: [AuthGuard] },
+  { path: 'profiles', component: ProfilesComponent, canActivate: [AuthGuard] },
 
 ];
 

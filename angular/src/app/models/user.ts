@@ -6,15 +6,24 @@ export class User {
   lastname: string;
   displayname: string;
   meta: Meta;
+  acf: Acf;
 }
 
 export class Meta {
   avatar: string;
   school: string;
-  goal: Goal;
+  goaldate: string;
+  goalamount: string;
 }
 
-export class Goal {
-  date: string;
-  amount: number;
+export class Acf {
+  avatar: Avatar;
+  school: string;
+  goaldate: string;
+  goalamount: string;
+}
+
+export class Avatar {
+  id: number;
+  url: string;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { SettingsService } from 'src/app/services/settings.service';
+import { ProfileService } from 'src/app/services/profile.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class ProfileSettingsComponent implements OnInit {
   goaldate = '';
   goalamount = '';
 
-  constructor(private settingsService: SettingsService, private authService: AuthService) { }
+  constructor(private profileService: ProfileService, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -27,7 +27,7 @@ export class ProfileSettingsComponent implements OnInit {
   updateSettings() {
     const formData = new FormData();
     formData.append('file', this.selectedFile);
-    this.settingsService.uploadFile(formData).subscribe(image => {
+    this.profileService.uploadFile(formData).subscribe(image => {
       // Handle result
       console.log(image);
 
@@ -39,7 +39,7 @@ export class ProfileSettingsComponent implements OnInit {
           'goalamount': this.goalamount,
         }
       };
-      this.settingsService.updateSettings(settings).subscribe(res => {
+      this.profileService.updateSettings(settings).subscribe(res => {
         console.log(res);
       }, err => {
         console.error(err);

@@ -9,10 +9,37 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class SettingsService {
+export class ProfileService {
   errors = null;
 
   constructor(private http: HttpClient) { }
+
+  public getCurrentUser<T>(): Observable<T> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
+
+    return this.http.get<T>(`${environment.apiURL}/users/me`, httpOptions)
+    .pipe(
+      catchError(this.handleError) // then handle the error
+    );
+  }
+
+  public getUsers<T>(): Observable<T> {
+    return this.http.get<T>(`${environment.apiURL}/users`, )
+    .pipe(
+      catchError(this.handleError) // then handle the error
+    );
+  }
+  public getUserById<T>(id: string): Observable<T> {
+    return this.http.get<T>(`${environment.apiURL}/users/${id}`, )
+    .pipe(
+      catchError(this.handleError) // then handle the error
+    );
+  }
 
   public uploadFile(data): Observable<any> {
     const token = localStorage.getItem('token');
