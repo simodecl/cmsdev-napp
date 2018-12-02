@@ -12,7 +12,12 @@
   </div>
   <div class="content-group">
     <h3 class="content-title">Slaapdoel</h3>
-    <p *ngIf="profile.acf.goaldate; else nogoal">{{ profile.acf.goalamount }} uur per nacht tegen {{ profile.acf.goaldate }}</p>
+    <p *ngIf="profile.acf.goaldate; else nogoal">{{ profile.acf.goalamount }} uur per nacht tegen {{ profile.acf.goaldate }}.</p>
+    <ng-template #nogoal>Slaapdoel is nog niet ingesteld.</ng-template>
+  </div>
+  <div class="content-group">
+    <h3 class="content-title">Slaapdoel</h3>
+    <p *ngIf="profile.acf.goaldate; else nogoal">{{ profile.acf.goalamount }} uur per nacht tegen {{ profile.acf.goaldate }}.</p>
     <ng-template #nogoal>Slaapdoel is nog niet ingesteld.</ng-template>
   </div>
 </div>
