@@ -14,10 +14,12 @@
  }
 
  #sidenav {
-  background-color: $blue;
-  margin-top: 44px;
+  background-color: $white;
+  margin-top: 50px;
   width: 250px;
-  color: $white;
+  color: $black;
+  -webkit-box-shadow: 6px 0 20px -3px $darkblue;
+          box-shadow: 6px 0 20px -3px $darkblue;
   transition: none;
   -webkit-transition: none;
   -moz-transition: none;

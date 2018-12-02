@@ -17,6 +17,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 import { ProfileDetailComponent } from './components/profiles/profile-detail/profile-detail.component';
 import { ProfileSettingsComponent } from './components/profiles/profile-settings/profile-settings.component';
+import { TokenService } from './interceptor/token.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,12 @@ import { ProfileSettingsComponent } from './components/profiles/profile-settings
   ],
   providers: [
     SidenavService,
-    AuthGuardService
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

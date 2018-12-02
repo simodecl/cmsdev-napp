@@ -1,3 +1,13 @@
-<p>
-  profile-detail works!
-</p>
+<div class="main">
+  <div class="profileHead" *ngIf="profile">
+    <div class="avatarContainer">
+      <img class="avatar" *ngIf="profile.acf.avatar.url; else placeholder" [src]="profile.acf.avatar.url" />
+      <ng-template #placeholder><img class="avatar" [src]="placeholderImg" /></ng-template>
+    </div>
+    <div class="profileName">
+      <h3 class="name">{{ profile.name }}</h3>
+      <p *ngIf="profile.acf.school">{{ profile.acf.school }}</p>
+    </div>
+    <button class="button-follow"><mat-icon>person_add</mat-icon></button>
+  </div>
+</div>
