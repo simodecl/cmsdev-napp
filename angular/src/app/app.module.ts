@@ -18,6 +18,7 @@ import { ProfilesComponent } from './components/profiles/profiles.component';
 import { ProfileDetailComponent } from './components/profiles/profile-detail/profile-detail.component';
 import { ProfileSettingsComponent } from './components/profiles/profile-settings/profile-settings.component';
 import { TokenService } from './interceptor/token.service';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -48,8 +49,13 @@ import { TokenService } from './interceptor/token.service';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenService,
       multi: true
-    }
+    },
+    // {
+    //   provide: MAT_DATE_LOCALE,
+    //   useValue: 'nl-BE'
+    // },
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

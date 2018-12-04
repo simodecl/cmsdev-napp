@@ -5,19 +5,25 @@
   type="file" (change)="onFileChanged($event)"
   #fileInput>
 <button (click)="fileInput.click()">Select File</button>
-<form class="form-settings" (ngSubmit)="updateSettings()">
+<form [formGroup]="fields" class="form-settings" (ngSubmit)="updateSettings()">
+  <input style="display: block;" type="number" formControlName="avatar" name="avatar">
   <div class="form-group">
     <label for="school">School</label><br>
-    <input name="school" [(ngModel)]="school">
+    <input formControlName="school" name="school">
   </div>
-  <div class="form-group">
+  <div class="date-group">
     <label for="goaldate">Slaapdoel datum</label><br>
-    <input name="goaldate" [(ngModel)]="goaldate">
+    <div class="date">
+        <input [matDatepicker]="myDatepicker" formControlName="goaldate" name="goaldate">
+        <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+    </div>
+    <mat-datepicker #myDatepicker></mat-datepicker>
   </div>
   <div class="form-group">
     <label for="goalamount">Slaapdoel hoeveelheid</label><br>
-    <input name="goalamount" [(ngModel)]="goalamount">
+    <input type="number" formControlName="goalamount" name="goalamount">
   </div>
   <button type="submit" class="button-update">Bijwerken</button>
 </form>
 </div>
+

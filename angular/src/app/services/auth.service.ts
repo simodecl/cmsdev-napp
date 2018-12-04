@@ -28,14 +28,7 @@ export class AuthService {
   }
 
   public getCurrentUser(): Observable<any> {
-    const token = localStorage.getItem('token');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`
-      })
-    };
-
-    return this.http.get(`${environment.apiURL}/users/me`, httpOptions)
+    return this.http.get(`${environment.apiURL}/users/me`)
     .pipe(
       catchError(this.handleError) // then handle the error
     );

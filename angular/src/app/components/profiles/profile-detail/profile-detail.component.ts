@@ -34,8 +34,8 @@ export class ProfileDetailComponent implements OnInit {
         this.dateParts = this.dateString.split('/');
         this.dateObject = new Date(this.dateParts[2], this.dateParts[1] - 1, this.dateParts[0]); // month is 0-based
 
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        this.profile.acf.goaldate = this.dateObject.toLocaleDateString('nl-BE', options);
+        // const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        // this.profile.acf.goaldate = this.dateObject.toLocaleDateString('nl-BE', options);
       }
 
       console.log(this.profile);

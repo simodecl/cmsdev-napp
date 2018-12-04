@@ -15,14 +15,7 @@ export class ProfileService {
   constructor(private http: HttpClient) { }
 
   public getCurrentUser<T>(): Observable<T> {
-    const token = localStorage.getItem('token');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`
-      })
-    };
-
-    return this.http.get<T>(`${environment.apiURL}/users/me`, httpOptions)
+    return this.http.get<T>(`${environment.apiURL}/users/me`)
     .pipe(
       catchError(this.handleError) // then handle the error
     );
@@ -42,11 +35,9 @@ export class ProfileService {
   }
 
   public uploadFile(data): Observable<any> {
-    const token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Disposition': 'attachment; filename=profile.png',
-        'Authorization': `Bearer ${token}`
       })
     };
 
@@ -56,15 +47,13 @@ export class ProfileService {
     );
   }
 
-  public updateSettings(data): Observable<any> {
-    const token = localStorage.getItem('token');
+  public updateSettings(data, id): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
       })
     };
-    return this.http.post(`${environment.apiURL}/users/me`, data, httpOptions)
+    return this.http.post(`${environment.acfURL}/users/${id}`, data, httpOptions)
     .pipe(
       catchError(this.handleError) // then handle the error
     );

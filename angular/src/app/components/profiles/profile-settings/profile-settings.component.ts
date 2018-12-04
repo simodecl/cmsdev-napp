@@ -1,7 +1,8 @@
+import { User } from 'src/app/models/user';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from 'src/app/services/profile.service';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-profile-settings',
@@ -10,13 +11,23 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ProfileSettingsComponent implements OnInit {
   selectedFile: File;
-  school = '';
-  goaldate = '';
-  goalamount = '';
+  fields: FormGroup;
 
-  constructor(private profileService: ProfileService, private authService: AuthService) { }
+
+  constructor(
+    private profileService: ProfileService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
+    this.fields = this.fb.group({
+      avatar: [],
+      school: [''],
+      goaldate: [''],
+      goalamount: ['']
+    });
+    this.getProfile();
   }
 
   onFileChanged(event) {
@@ -25,31 +36,58 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   updateSettings() {
-    const formData = new FormData();
-    formData.append('file', this.selectedFile);
-    this.profileService.uploadFile(formData).subscribe(image => {
-      // Handle result
-      console.log(image);
+    if (this.selectedFile) {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+      this.profileService.uploadFile(formData).subscribe(image => {
+        // Handle result
+        console.log(image);
+        this.fields.patchValue({
+          avatar: image.id
+        });
 
+        const settings = {
+          'fields': this.fields.value
+        };
+        const id = this.route.snapshot.paramMap.get('id');
+        this.profileService.updateSettings(settings, id).subscribe(res => {
+          console.log(res);
+          this.router.navigate([`profile/${id}`]);
+        }, err => {
+          console.error(err);
+        });
+
+      },
+      error => {
+        console.error(error);
+      });
+    } else {
       const settings = {
-        'meta': {
-          'avatar': `${image.id}`,
-          'school': this.school,
-          'goaldate': this.goaldate.split('/').reverse().join(''),
-          'goalamount': this.goalamount,
-        }
+        'fields': this.fields.value
       };
-      this.profileService.updateSettings(settings).subscribe(res => {
+      const id = this.route.snapshot.paramMap.get('id');
+      this.profileService.updateSettings(settings, id).subscribe(res => {
         console.log(res);
+        this.router.navigate([`profile/${id}`]);
       }, err => {
         console.error(err);
       });
-    },
-    error => {
-      console.error(error);
-    },
-    () => {
-      // Route to new page
-    });
+    }
+  }
+
+  getProfile() {
+    const id = this.route.snapshot.paramMap.get('id');
+      this.profileService.getUserById<User>(id).subscribe(user => {
+        console.log(user);
+        this.fields.patchValue({
+          avatar: user.acf.avatar.id,
+          school: user.acf.school,
+          goaldate: user.acf.goaldate,
+          goalamount: user.acf.goalamount
+        });
+        console.log(this.fields.value);
+      }, err => {
+        console.error(err);
+      });
   }
 }
