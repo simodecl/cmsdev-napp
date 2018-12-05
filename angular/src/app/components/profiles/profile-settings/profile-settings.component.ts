@@ -12,6 +12,8 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class ProfileSettingsComponent implements OnInit {
   selectedFile: File;
   fields: FormGroup;
+  fieldsData;
+  dateData;
 
 
   constructor(
@@ -62,9 +64,16 @@ export class ProfileSettingsComponent implements OnInit {
         console.error(error);
       });
     } else {
+      this.fieldsData = this.fields.value;
+      this.dateData = new Date(this.fieldsData.goaldate);
+      this.dateData = (this.dateData.getMonth() + 1) + '/' + this.dateData.getDate() + '/' +  this.dateData.getFullYear();
+      this.fields.patchValue({
+        goaldate: this.dateData
+      });
       const settings = {
         'fields': this.fields.value
       };
+      console.log(settings);
       const id = this.route.snapshot.paramMap.get('id');
       this.profileService.updateSettings(settings, id).subscribe(res => {
         console.log(res);
@@ -79,7 +88,7 @@ export class ProfileSettingsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
       this.profileService.getUserById<User>(id).subscribe(user => {
         console.log(user);
-        this.fields.patchValue({
+        this.fields.setValue({
           avatar: user.acf.avatar.id,
           school: user.acf.school,
           goaldate: user.acf.goaldate,
