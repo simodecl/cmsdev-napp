@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeaderService } from 'src/app/services/header.service';
 
 @Component({
   selector: 'app-profiles',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private headerService: HeaderService) { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.headerService.setTitle('Profielen');
+    });
   }
 
 }

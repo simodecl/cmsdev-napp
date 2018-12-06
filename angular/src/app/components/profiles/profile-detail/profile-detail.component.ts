@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from 'src/app/services/profile.service';
 import { User } from 'src/app/models/user';
+import { HeaderService } from 'src/app/services/header.service';
 
 @Component({
   selector: 'app-profile-detail',
@@ -18,10 +19,14 @@ export class ProfileDetailComponent implements OnInit {
   constructor(
     private profileService: ProfileService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private headerService: HeaderService
   ) { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.headerService.setTitle('Profiel');
+    });
     this.getProfile();
   }
 
@@ -33,7 +38,6 @@ export class ProfileDetailComponent implements OnInit {
         this.dateString = res.acf.goaldate;
         this.dateObject = new Date(this.dateString); // month is 0-based
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        console.log(this.dateString);
         this.profile.acf.goaldate = this.dateObject.toLocaleDateString('nl-BE', options);
       }
 

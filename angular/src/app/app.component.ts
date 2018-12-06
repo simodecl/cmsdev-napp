@@ -2,6 +2,8 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { MatSidenav } from '@angular/material';
 import { SidenavService } from './services/sidenav-service.service';
+import { AuthService } from './services/auth.service';
+import { HeaderService } from './services/header.service';
 
 @Component({
   selector: 'app-root',
@@ -9,16 +11,23 @@ import { SidenavService } from './services/sidenav-service.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'napp';
+  title = '';
+  currentUser;
 
   @ViewChild('sidenav') public sidenav: MatSidenav;
   showHead = false;
 
   constructor(
     private router: Router,
-    private sidenavService: SidenavService
+    private sidenavService: SidenavService,
+    private authService: AuthService,
+    private headerService: HeaderService
     ) {
-    router.events.forEach(event => {
+
+  }
+
+  ngOnInit(): void {
+    this.router.events.forEach(event => {
       if (event instanceof NavigationStart) {
         if (event['url'] === '/login') {
           this.showHead = false;
@@ -29,10 +38,8 @@ export class AppComponent implements OnInit {
         }
       }
     });
-  }
-
-  ngOnInit(): void {
     this.sidenavService.setSidenav(this.sidenav);
-    console.log(this.sidenav);
+    this.currentUser = this.authService.getDecodedToken().data.user.id;
+
   }
 }

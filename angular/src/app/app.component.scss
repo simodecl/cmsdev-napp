@@ -13,10 +13,14 @@
   -o-transition: all 0.2s ease;
  }
 
+ mat-icon {
+  font-family: 'Material Icons';
+ }
+
  #sidenav {
   background-color: $white;
   margin-top: 50px;
-  width: 250px;
+  width: 75vw;
   color: $black;
   -webkit-box-shadow: 6px 0 20px -3px $darkblue;
           box-shadow: 6px 0 20px -3px $darkblue;
@@ -25,4 +29,19 @@
   -moz-transition: none;
   -ms-transition: none;
   -o-transition: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.navLink {
+  text-decoration: none;
+  color: $nightblue;
+  margin-left: 10px;
+}
+
+.sidenav-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px 20px;
 }

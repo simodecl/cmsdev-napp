@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -48,8 +49,12 @@ export class AuthService {
 
   getToken(): string {
     const token = localStorage.getItem('token');
-
     return token;
+  }
+
+  getDecodedToken(): any {
+    const token = localStorage.getItem('token');
+    return jwt_decode(token);
   }
 
   public isAuthenticated(): boolean {

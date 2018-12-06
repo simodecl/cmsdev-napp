@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from 'src/app/services/profile.service';
+import { HeaderService } from 'src/app/services/header.service';
 
 @Component({
   selector: 'app-profile-settings',
@@ -20,9 +21,13 @@ export class ProfileSettingsComponent implements OnInit {
     private profileService: ProfileService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private headerService: HeaderService) { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.headerService.setTitle('Profiel bewerken');
+    });
     this.fields = this.fb.group({
       avatar: [],
       school: [''],
