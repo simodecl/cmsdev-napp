@@ -1,7 +1,7 @@
 <div class="main" *ngIf="profile">
   <div class="profile-head" *ngIf="profile.acf">
     <div class="avatar-container">
-      <img class="avatar" *ngIf="profile.acf.avatar.url; else placeholder" [src]="profile.acf.avatar.url" />
+      <img class="avatar" *ngIf="profile.acf.avatar; else placeholder" [src]="profile.acf.avatar.url" />
       <ng-template #placeholder><img class="avatar" [src]="placeholderImg" /></ng-template>
     </div>
     <div class="profile-name">

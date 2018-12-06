@@ -10,6 +10,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class ProfilesComponent implements OnInit {
   profiles: User[];
+  placeholderImg = '/assets/placeholder.jpg';
 
   constructor(
     private headerService: HeaderService,

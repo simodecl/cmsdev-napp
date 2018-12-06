@@ -1,3 +1,15 @@
-<p>
-  profiles works!
-</p>
+<div class="main" *ngIf="profiles">
+  <div class="profile" *ngFor="let profile of profiles">
+    <div class="profile-head" *ngIf="profile.acf">
+      <div class="avatar-container">
+        <img class="avatar" *ngIf="profile.acf.avatar; else placeholder" [src]="profile.acf.avatar.url" />
+        <ng-template #placeholder><img class="avatar" [src]="placeholderImg" /></ng-template>
+      </div>
+      <div class="profile-name">
+        <h3 class="name">{{ profile.name }}</h3>
+        <p *ngIf="profile.acf.school">{{ profile.acf.school }}</p>
+      </div>
+      <button class="button-follow"><mat-icon>person_add</mat-icon></button>
+    </div>
+  </div>
+</div>
