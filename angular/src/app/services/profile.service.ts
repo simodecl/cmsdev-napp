@@ -22,7 +22,7 @@ export class ProfileService {
   }
 
   public getUsers<T>(): Observable<T> {
-    return this.http.get<T>(`${environment.apiURL}/users`, )
+    return this.http.get<T>(`${environment.apiURL}/users`)
     .pipe(
       catchError(this.handleError) // then handle the error
     );
