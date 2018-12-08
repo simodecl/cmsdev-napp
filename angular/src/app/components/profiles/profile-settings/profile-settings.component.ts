@@ -91,17 +91,17 @@ export class ProfileSettingsComponent implements OnInit {
 
   getProfile() {
     const id = this.route.snapshot.paramMap.get('id');
-      this.profileService.getUserById<User>(id).subscribe(user => {
-        console.log(user);
-        this.fields.setValue({
-          avatar: user.acf.avatar.id,
-          school: user.acf.school,
-          goaldate: user.acf.goaldate,
-          goalamount: user.acf.goalamount
-        });
-        console.log(this.fields.value);
-      }, err => {
-        console.error(err);
+    this.profileService.getUserById<User>(id).subscribe(user => {
+      console.log(user);
+      this.fields.setValue({
+        avatar: user.acf.avatar.id,
+        school: user.acf.school,
+        goaldate: user.acf.goaldate,
+        goalamount: user.acf.goalamount
       });
+      console.log(this.fields.value);
+    }, err => {
+      console.error(err);
+    });
   }
 }

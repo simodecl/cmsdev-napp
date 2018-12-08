@@ -12,6 +12,7 @@ export class Acf {
   school: string;
   goaldate: string;
   goalamount: string;
+  following: Array<number>;
 }
 
 export class Avatar {

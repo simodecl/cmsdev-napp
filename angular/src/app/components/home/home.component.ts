@@ -12,6 +12,8 @@ export class HomeComponent implements OnInit {
   constructor(private headerService: HeaderService) { }
 
   ngOnInit() {
-    this.headerService.setTitle('Tijdlijn');
+    setTimeout(() => {
+      this.headerService.setTitle('Tijdlijn');
+    });
   }
 }

@@ -9,7 +9,7 @@
         <h3 class="name">{{ profile.name }}</h3>
         <p *ngIf="profile.acf.school">{{ profile.acf.school }}</p>
       </div>
-      <button class="button-follow"><mat-icon>person_add</mat-icon></button>
+      <button (click)="follow(profile.id)" class="button-follow"><mat-icon>person_add</mat-icon></button>
     </div>
   </div>
 </div>
