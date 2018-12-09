@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ProfilesComponent implements OnInit {
   profiles: User[];
   placeholderImg = '/assets/placeholder.jpg';
+  currentUser: User;
 
   constructor(
     private headerService: HeaderService,
@@ -22,7 +23,17 @@ export class ProfilesComponent implements OnInit {
     setTimeout(() => {
       this.headerService.setTitle('Profielen');
     });
+    this.getCurrentUser();
     this.getProfiles();
+  }
+
+  getCurrentUser() {
+    this.authService.getCurrentUser<User>().subscribe(user => {
+      this.currentUser = user;
+      console.log(this.currentUser);
+    }, err => {
+      console.error(err);
+    });
   }
 
   getProfiles() {
@@ -35,23 +46,38 @@ export class ProfilesComponent implements OnInit {
   }
 
   follow(id) {
-    const currentUser = this.authService.getDecodedToken().data.user.id;
-    this.profileService.getUserById<User>(currentUser).subscribe(user => {
-      console.log(user);
-      const newFollow = user.acf.following;
+    const newFollow = this.currentUser.acf.following;
+    if (newFollow.includes(id)) {
+      newFollow.filter(e => e !== id);
+    } else {
       newFollow.push(id);
-      const settings = {
-        'fields': {
-          'following': newFollow
-        }
-      };
-      console.log(settings);
-      this.profileService.updateSettings(settings, currentUser).subscribe(res => {
-        console.log(res);
-      }, err => {
-        console.error(err);
-      });
+    }
+    const settings = {
+      'fields': {
+        'following': newFollow
+      }
+    };
+    this.profileService.updateSettings(settings, this.currentUser.id).subscribe(res => {
+      console.log(res);
+    }, err => {
+      console.error(err);
+    });
+  }
 
+  unfollow(id) {
+    const newFollow = this.currentUser.acf.following;
+    const i = newFollow.indexOf(id);
+    if (i > -1) {
+      newFollow.splice(i, 1);
+    }
+    console.log(newFollow);
+    const settings = {
+      'fields': {
+        'following': newFollow
+      }
+    };
+    this.profileService.updateSettings(settings, this.currentUser.id).subscribe(res => {
+      console.log(res);
     }, err => {
       console.error(err);
     });

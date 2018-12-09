@@ -9,7 +9,16 @@
         <h3 class="name">{{ profile.name }}</h3>
         <p *ngIf="profile.acf.school">{{ profile.acf.school }}</p>
       </div>
-      <button (click)="follow(profile.id)" class="button-follow"><mat-icon>person_add</mat-icon></button>
+      <div *ngIf="currentUser.acf.following.includes(profile.id); else followTemplate">
+        <button (click)="unfollow(profile.id)" class="button-follow">
+          <mat-icon>person_add_disabled</mat-icon>
+        </button>
+      </div>
+      <ng-template #followTemplate>
+        <button (click)="follow(profile.id)" class="button-follow">
+          <mat-icon>person_add</mat-icon>
+        </button>
+      </ng-template>
     </div>
   </div>
 </div>

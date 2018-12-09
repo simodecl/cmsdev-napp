@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, of, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import * as jwt_decode from 'jwt-decode';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,8 @@ export class AuthService {
     );
   }
 
-  public getCurrentUser(): Observable<any> {
-    return this.http.get(`${environment.apiURL}/users/me`)
+  public getCurrentUser<T>(): Observable<any> {
+    return this.http.get<T>(`${environment.apiURL}/users/me`)
     .pipe(
       catchError(this.handleError) // then handle the error
     );
