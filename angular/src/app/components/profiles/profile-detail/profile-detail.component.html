@@ -16,8 +16,21 @@
     <ng-template #nogoal>Slaapdoel is nog niet ingesteld.</ng-template>
   </div>
   <div class="content-group">
-    <h3 class="content-title">Slaapdoel</h3>
-    <p *ngIf="profile.acf.goaldate; else nogoal">{{ profile.acf.goalamount }} uur per nacht tegen {{ profile.acf.goaldate }}.</p>
-    <ng-template #nogoal>Slaapdoel is nog niet ingesteld.</ng-template>
+    <h3 class="content-title">Slaaptype</h3>
+    <p *ngIf="profile.acf.sleeptype; else notype">{{ profile.acf.sleeptype }}</p>
+    <ng-template #notype>Deze gebruiker heeft de slaapquiz nog niet gemaakt.</ng-template>
+  </div>
+
+  <div class="content-group">
+    <h3 class="content-title">Volgend</h3>
+    <div class="following-container" *ngIf="profile.acf.following; else nofollow">
+      <div class="avatar-container following" *ngFor="let followed of following">
+        <a [routerLink]="['/profile', followed.id]">
+          <img class="avatar" *ngIf="followed.acf.avatar; else placeholder2" [src]="followed.acf.avatar.url" />
+          <ng-template #placeholder2><img class="avatar" [src]="placeholderImg" /></ng-template>
+        </a>
+      </div>
+    </div>
+    <ng-template #nofollow>Deze gebruiker volgt nog niemand.</ng-template>
   </div>
 </div>

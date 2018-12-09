@@ -13,6 +13,7 @@ export class Acf {
   goaldate: string;
   goalamount: string;
   following: Array<number>;
+  sleeptype: String;
 }
 
 export class Avatar {

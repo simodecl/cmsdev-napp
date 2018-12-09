@@ -61,3 +61,12 @@
 .content-title {
   font-size: .9rem;
 }
+
+.following-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.following {
+  margin: 5px;
+}

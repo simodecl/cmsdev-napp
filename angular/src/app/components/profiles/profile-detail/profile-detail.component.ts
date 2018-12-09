@@ -10,11 +10,12 @@ import { HeaderService } from 'src/app/services/header.service';
   styleUrls: ['./profile-detail.component.scss']
 })
 export class ProfileDetailComponent implements OnInit {
-  profile;
+  profile: User;
   placeholderImg = '/assets/placeholder.jpg';
   dateString;
   dateParts;
   dateObject;
+  following = [];
 
   constructor(
     private profileService: ProfileService,
@@ -40,8 +41,15 @@ export class ProfileDetailComponent implements OnInit {
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         this.profile.acf.goaldate = this.dateObject.toLocaleDateString('nl-BE', options);
       }
-
       console.log(this.profile);
+      this.profile.acf.following.forEach(followId => {
+        this.profileService.getUserById<User>(followId.toString()).subscribe(followed => {
+            this.following.push(followed);
+        }, err => {
+          console.error(err);
+        });
+      });
+      console.log(this.following);
     }, err => {
       console.error(err);
     });
