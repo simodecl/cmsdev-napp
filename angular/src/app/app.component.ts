@@ -40,6 +40,10 @@ export class AppComponent implements OnInit {
     });
     this.sidenavService.setSidenav(this.sidenav);
     this.currentUser = this.authService.getDecodedToken().data.user.id;
+    this.router.events.subscribe(event => {
+      // close sidenav on routing
+      this.sidenavService.close();
+    });
 
   }
 }
