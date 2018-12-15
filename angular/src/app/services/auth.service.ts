@@ -29,7 +29,7 @@ export class AuthService {
     );
   }
 
-  public getCurrentUser<T>(): Observable<any> {
+  public getCurrentUser<T>(): Observable<T> {
     return this.http.get<T>(`${environment.apiURL}/users/me`)
     .pipe(
       catchError(this.handleError) // then handle the error

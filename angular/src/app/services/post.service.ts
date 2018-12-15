@@ -13,13 +13,19 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  public getSelfie<T>(): Observable<T> {
+  public getSelfies<T>(): Observable<T> {
     return this.http.get<T>(`${environment.apiURL}/selfie?_embed`)
     .pipe(
       catchError(this.handleError) // then handle the error
     );
   }
 
+  public getSelfiesByFollowing<T>(following: string): Observable<T> {
+    return this.http.get<T>(`${environment.apiURL}/selfie?_embed&author=${following}`)
+    .pipe(
+      catchError(this.handleError) // then handle the error
+    );
+  }
   public getSelfieById<T>(id: string): Observable<T> {
     return this.http.get<T>(`${environment.apiURL}/selfie/${id}?_embed`)
     .pipe(
