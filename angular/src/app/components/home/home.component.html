@@ -1,3 +1,34 @@
 <div class="main">
-
-</div>>
+  <div *ngIf="selfies">
+    <div *ngFor="let selfie of selfies" class="card">
+      <div class="card-head">
+        <div class="avatar-container">
+          <img class="avatar" [src]="selfie._embedded.author[0].acf.avatar.url" />
+        </div>
+        <div class="card-author">
+          {{ selfie._embedded.author[0].name }}
+        </div>
+      </div>
+      <div class="img-container">
+        <img class="img" [src]="selfie._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url" />
+      </div>
+      <div class="card-foot">
+        <div class="card-title">
+          {{ selfie.title.rendered }}
+        </div>
+        <div *ngIf="selfie._embedded['wp:term'][0]" class="card-tags">
+          <div class="card-tag" *ngFor="let hashtag of selfie._embedded['wp:term'][0]">
+            #{{ hashtag.name }}
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <span>
+          <mat-icon>favorite_border</mat-icon>0
+        </span>
+        <a href="" class="comments"><mat-icon>comment</mat-icon>Reageren</a>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!selfies">De personen die je volgt hebben nog niets gepost.</div>
+</div>

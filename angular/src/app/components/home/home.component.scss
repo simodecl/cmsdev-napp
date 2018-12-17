@@ -4,4 +4,91 @@
   height: 100vh;
   width: 100vw;
   background-color: $lightblue;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.card {
+  background: $blue;
+  width: 100vw;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  color: $white;
+
+}
+
+.card-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+}
+
+.avatar-container{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  overflow:hidden;
+  background-color: $white;
+  margin-right: 10px;
+}
+.avatar {
+  display:block;
+  margin:auto;
+  max-width:32px;
+  max-height: 32px;
+}
+
+.card-foot {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.card-title {
+  margin-right: 5px;
+}
+
+.card-tag {
+  color: $lightblue;
+  margin-right: 5px;
+}
+
+.img-container img {
+  width: 100%;
+  max-width: 500px;
+}
+
+.actions {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	box-sizing: border-box;
+}
+
+.actions span, .actions a {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	flex: 1;
+	font-size: 14px;
+	color: $white;
+	cursor: pointer;
+	padding: 8px 0;
+	transition: .2s;
+	text-decoration: none;
+}
+
+
+.actions mat-icon {
+	margin-right: 8px;
+}
+

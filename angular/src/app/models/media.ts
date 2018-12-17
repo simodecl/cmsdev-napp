@@ -9,9 +9,12 @@ export class MediaDetails {
 }
 
 export class Sizes {
-  thumbnail: Thumbnail;
+  thumbnail: SizeURL;
+  medium: SizeURL;
+  medium_large: SizeURL;
+  large: SizeURL;
 }
 
-export class Thumbnail {
+export class SizeURL {
   soure_url: string;
 }
