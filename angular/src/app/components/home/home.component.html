@@ -1,6 +1,6 @@
 <div class="main">
   <div *ngIf="selfies">
-    <div *ngFor="let selfie of selfies" class="card">
+    <div *ngFor="let selfie of selfies; let i = index" class="card">
       <div class="card-head">
         <div class="avatar-container">
           <img class="avatar" [src]="selfie._embedded.author[0].acf.avatar.url" />
@@ -23,10 +23,15 @@
         </div>
       </div>
       <div class="actions">
-        <span>
-          <mat-icon>favorite_border</mat-icon>0
+        <span *ngIf="selfie.acf.likes" [ngClass]="selfie.acf.likes.includes(currentUser.id) ? 'liked' : ''">
+            <mat-icon (click)="toggleLike(selfie, i)">favorite_border</mat-icon>
+          <div>{{ selfie.acf.likes.length }}</div>
         </span>
-        <a href="" class="comments"><mat-icon>comment</mat-icon>Reageren</a>
+        <span *ngIf="!selfie.acf.likes">
+          <mat-icon (click)="toggleLike(selfie, i)">favorite_border</mat-icon>
+          <div>0</div>
+        </span>
+        <a [routerLink]="['/selfie', selfie.id]" class="comments"><mat-icon>comment</mat-icon>Reageren</a>
       </div>
     </div>
   </div>

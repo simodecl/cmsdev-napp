@@ -1,4 +1,4 @@
-<div class="main" *ngIf="profiles">
+<div class="main" *ngIf="profiles && currentUser">
   <div class="profile" *ngFor="let profile of profiles">
     <div class="profile-head" *ngIf="profile && profile.id !== currentUser.id">
       <a [routerLink]="['/profile', profile.id]">
@@ -11,16 +11,16 @@
         <h3 class="name">{{ profile.name }}</h3>
         <p *ngIf="profile.acf.school">{{ profile.acf.school }}</p>
       </div>
-      <div *ngIf="currentUser.acf.following.includes(profile.id); else followTemplate">
+      <div *ngIf="currentUser.acf.following.includes(profile.id)">
         <button (click)="unfollow(profile.id)" class="button-follow">
           <mat-icon>person_add_disabled</mat-icon>
         </button>
       </div>
-      <ng-template #followTemplate>
+      <div *ngIf="!currentUser.acf.following.includes(profile.id)">
         <button (click)="follow(profile.id)" class="button-follow">
           <mat-icon>person_add</mat-icon>
         </button>
-      </ng-template>
+      </div>
     </div>
   </div>
 </div>

@@ -44,4 +44,51 @@ export class HomeComponent implements OnInit {
       console.error(err);
     });
   }
+  toggleLike(selfie, index) {
+    let newLike = [];
+    if (selfie.acf.likes) {
+      newLike = selfie.acf.likes;
+    }
+    console.log(newLike);
+    if (newLike.includes(this.currentUser.id)) {
+      const i = newLike.indexOf(this.currentUser.id);
+      if (i > -1) {
+        newLike.splice(i, 1);
+        this.selfies[index].acf.likes = newLike;
+      }
+      console.log(newLike);
+    } else {
+      newLike.push(this.currentUser.id);
+      this.selfies[index].acf.likes = newLike;
+      console.log(this.selfies[index].acf.likes);
+    }
+    const settings = {
+      'fields': {
+        'likes': newLike
+      }
+    };
+    this.postService.updateSelfie(settings, selfie.id).subscribe(res => {
+      console.log(res);
+    }, err => {
+      console.error(err);
+    });
+  }
+
+  updateArray(id, user) {
+    let i;
+    i = this.selfies.findIndex((obj => obj.id === id));
+    if (newLike.includes(this.currentUser.id)) {
+      const i = newLike.indexOf(this.currentUser.id);
+      if (i > -1) {
+        newLike.splice(i, 1);
+      }
+      console.log(newLike);
+    } else {
+      newLike.push(this.currentUser.id);
+      console.log(newLike);
+    }
+
+    //Log object to console again.
+    console.log("After update: ", myArray[i])
+  }
 }

@@ -19,6 +19,7 @@ import { ProfileDetailComponent } from './components/profiles/profile-detail/pro
 import { ProfileSettingsComponent } from './components/profiles/profile-settings/profile-settings.component';
 import { TokenService } from './interceptor/token.service';
 import { MAT_DATE_LOCALE } from '@angular/material';
+import { SelfieDetailComponent } from './components/home/selfie-detail/selfie-detail.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MAT_DATE_LOCALE } from '@angular/material';
     HeaderComponent,
     ProfilesComponent,
     ProfileDetailComponent,
-    ProfileSettingsComponent
+    ProfileSettingsComponent,
+    SelfieDetailComponent
   ],
   imports: [
     BrowserModule,

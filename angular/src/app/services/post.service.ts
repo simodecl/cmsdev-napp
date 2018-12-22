@@ -33,6 +33,18 @@ export class PostService {
     );
   }
 
+  public updateSelfie(data, id): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post(`${environment.acfURL}/selfie/${id}`, data, httpOptions)
+    .pipe(
+      catchError(this.handleError) // then handle the error
+    );
+  }
+
   private handleError(errorResponse: HttpErrorResponse) {
     if (errorResponse.error instanceof ErrorEvent) {
       console.error('Client side error: ', errorResponse.error.message);
