@@ -73,22 +73,4 @@ export class HomeComponent implements OnInit {
       console.error(err);
     });
   }
-
-  updateArray(id, user) {
-    let i;
-    i = this.selfies.findIndex((obj => obj.id === id));
-    if (newLike.includes(this.currentUser.id)) {
-      const i = newLike.indexOf(this.currentUser.id);
-      if (i > -1) {
-        newLike.splice(i, 1);
-      }
-      console.log(newLike);
-    } else {
-      newLike.push(this.currentUser.id);
-      console.log(newLike);
-    }
-
-    //Log object to console again.
-    console.log("After update: ", myArray[i])
-  }
 }
