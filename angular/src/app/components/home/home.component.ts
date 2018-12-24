@@ -44,23 +44,21 @@ export class HomeComponent implements OnInit {
       console.error(err);
     });
   }
+
   toggleLike(selfie, index) {
     let newLike = [];
     if (selfie.acf.likes) {
       newLike = selfie.acf.likes;
     }
-    console.log(newLike);
     if (newLike.includes(this.currentUser.id)) {
       const i = newLike.indexOf(this.currentUser.id);
       if (i > -1) {
         newLike.splice(i, 1);
         this.selfies[index].acf.likes = newLike;
       }
-      console.log(newLike);
     } else {
       newLike.push(this.currentUser.id);
       this.selfies[index].acf.likes = newLike;
-      console.log(this.selfies[index].acf.likes);
     }
     const settings = {
       'fields': {
