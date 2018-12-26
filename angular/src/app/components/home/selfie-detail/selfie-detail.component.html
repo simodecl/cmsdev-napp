@@ -2,7 +2,8 @@
   <div *ngIf="selfie" class="card">
     <div class="card-head">
       <div class="avatar-container">
-        <img class="avatar" [src]="selfie._embedded.author[0].acf.avatar.url" />
+          <img class="avatar" *ngIf="selfie._embedded.author[0].acf.avatar" [src]="selfie._embedded.author[0].acf.avatar.url" />
+          <img class="avatar" *ngIf="!selfie._embedded.author[0].acf.avatar" [src]="placeholderImg" />
       </div>
       <div class="card-author">
         {{ selfie._embedded.author[0].name }}
@@ -21,7 +22,7 @@
         </div>
       </div>
     </div>
-    <div class="actions">
+    <div *ngIf="selfie.acf" class="actions">
       <span *ngIf="selfie.acf.likes" [ngClass]="selfie.acf.likes.includes(currentUser.id) ? 'liked' : ''">
           <mat-icon (click)="toggleLike(selfie)">favorite_border</mat-icon>
         <div>{{ selfie.acf.likes.length }}</div>
@@ -31,6 +32,65 @@
         <div>0</div>
       </span>
       <a [routerLink]="['/selfie', selfie.id]" class="comments"><mat-icon>comment</mat-icon>Reageren</a>
+    </div>
+  </div>
+  <form [formGroup]="commentForm" class="comment-form" (ngSubmit)="postComment(0)">
+    <div class="form-group">
+      <textarea formControlName="content" name="content"></textarea>
+      <button class="button-comment" type="submit">Reageren</button>
+    </div>
+  </form>
+  <div *ngIf="comments" class="comments">
+    <div *ngFor="let comment of comments; let i = index">
+      <div *ngIf="comment.parent === 0" class="comment-container">
+          <div *ngIf="comment._embedded" class="comment">
+            <a [routerLink]="['/profile', comment._embedded.author[0].id]">
+              <div class="avatar-container">
+                <img class="avatar" *ngIf="comment._embedded.author[0].acf.avatar" [src]="comment._embedded.author[0].acf.avatar.url" />
+                <img class="avatar" *ngIf="!comment._embedded.author[0].acf.avatar" [src]="placeholderImg" />
+              </div>
+            </a>
+            <div class="comment-main">
+              <div class="comment-text">
+                <a [routerLink]="['/profile', comment._embedded.author[0].id]" class="comment-author">
+                    {{ comment._embedded.author[0].name }}
+                </a>
+                {{comment.content.rendered}}
+              </div>
+              <div class="comment-foot">
+                <span>{{ getTimeDifference(comment.date) }}</span>
+                <div class="comment-react" (click)="showForm=!showForm">Beantwoorden</div>
+              </div>
+            </div>
+          </div>
+          <form [formGroup]="subcommentForm" [ngClass]="showForm ? 'subcomment-form' : 'hide'" (ngSubmit)="postSubcomment(comment.id)">
+            <div class="form-group">
+              <textarea formControlName="content" name="content"></textarea>
+              <button class="button-comment" type="submit">Reageren</button>
+            </div>
+          </form>
+          <div *ngFor="let subcomment of comments">
+              <div *ngIf="subcomment.parent === comment.id" class="subcomment">
+                  <a [routerLink]="['/profile', comment._embedded.author[0].id]">
+                    <div class="avatar-container">
+                      <img class="avatar" *ngIf="comment._embedded.author[0].acf.avatar" [src]="comment._embedded.author[0].acf.avatar.url" />
+                      <img class="avatar" *ngIf="!comment._embedded.author[0].acf.avatar" [src]="placeholderImg" />
+                    </div>
+                  </a>
+                  <div class="comment-text">
+                    <div class="comment-text">
+                      <a [routerLink]="['/profile', comment._embedded.author[0].id]" class="comment-author">
+                          {{ subcomment._embedded.author[0].name }}
+                      </a>
+                      {{ subcomment.content.rendered }}
+                    </div>
+                    <div class="comment-foot">
+                      <span>{{ getTimeDifference(subcomment.date) }}</span>
+                    </div>
+                  </div>
+              </div>
+            </div>
+      </div>
     </div>
   </div>
 </div>

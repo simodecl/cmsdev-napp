@@ -98,3 +98,87 @@
 	-webkit-text-fill-color: $red !important;
 	-webkit-text-stroke-color: $red !important;
 }
+
+.comment-container {
+  width: 100vw;
+  margin-bottom: 20px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: row;
+  margin: 0px 20px;
+}
+
+.subcomment {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 20px 10px 60px;
+}
+
+.comment-text {
+  color: $nightblue;
+}
+
+.comment-author {
+  text-decoration: none;
+  color: $blue;
+  font-weight: bold;
+}
+
+.comment-foot {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  color: $blue;
+}
+
+.comment-foot span {
+  width: 40px;
+}
+
+.comment-react {
+  color: $darkblue;
+  font-weight: bold;
+}
+
+.comment-form, .subcomment-form {
+  width: 100vw;
+}
+
+
+.form-group {
+  margin: 0 20px;
+}
+
+.subcomment-form .form-group{
+  margin: 10px 20px 10px 60px;
+}
+
+.form-group textarea {
+  width: 100%;
+  padding: 15px;
+  color: $blue;
+  background-color: $white;
+  border: solid 1px $darkblue;
+  border-radius: 2px;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.button-comment {
+  padding: 15px;
+  color: $white;
+  background-color: $darkblue;
+  border: solid 1px $blue;
+  border-radius: 2px;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+  margin-bottom: 25px;
+}
+
+.hide {
+  display: none;
+}

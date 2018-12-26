@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Selfie } from 'src/app/models/selfie';
 import { User } from 'src/app/models/user';
+import { Comment } from 'src/app/models/comment';
 import { PostService } from 'src/app/services/post.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { ActivatedRoute } from '@angular/router';
+import { CommentsService } from 'src/app/services/comments.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-selfie-detail',
@@ -12,23 +15,40 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./selfie-detail.component.scss']
 })
 export class SelfieDetailComponent implements OnInit {
+  postId: number;
   currentUser: User;
   selfie: Selfie;
+  comments;
+  commentForm: FormGroup;
+  subcommentForm: FormGroup;
+  showForm = false;
+
+  placeholderImg = '/assets/placeholder.jpg';
 
   constructor(
     private postService: PostService,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private commentsService: CommentsService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
     setTimeout(() => {
-      this.headerService.setTitle('Profiel');
+      this.headerService.setTitle('Selfie');
+    });
+    this.commentForm = this.fb.group({
+      content: [''],
+    });
+    this.subcommentForm = this.fb.group({
+      content: [''],
     });
     this.getCurrentUser();
     this.route.params.subscribe(param => {
+      this.postId = param.id;
       this.getSelfie(param.id);
+      this.getComments(param.id);
     });
 
   }
@@ -42,9 +62,43 @@ export class SelfieDetailComponent implements OnInit {
   }
 
   getSelfie(id) {
-
     this.postService.getSelfieById<Selfie>(id).subscribe(res => {
       this.selfie = res;
+    }, err => {
+      console.error(err);
+    });
+  }
+  getComments(id) {
+    this.commentsService.getCommentsByPost<Comment>(id).subscribe(res => {
+      this.comments = res;
+    }, err => {
+      console.error(err);
+    });
+  }
+
+  postComment() {
+    const data = {
+      'content': this.commentForm.value.content,
+      'parent': 0,
+      'post': this.postId
+    };
+    this.commentsService.postComment<Comment>(data).subscribe(res => {
+      this.comments.shift(res);
+      this.getComments(this.postId);
+    }, err => {
+      console.error(err);
+    });
+  }
+
+  postSubcomment(parent) {
+    const data = {
+      'content': this.subcommentForm.value.content,
+      'parent': parent,
+      'post': this.postId
+    };
+    this.commentsService.postComment<Comment>(data).subscribe(res => {
+      this.comments.shift(res);
+      this.getComments(this.postId);
     }, err => {
       console.error(err);
     });
@@ -75,5 +129,28 @@ export class SelfieDetailComponent implements OnInit {
     }, err => {
       console.error(err);
     });
+  }
+
+  getTimeDifference(datetime) {
+    datetime = typeof datetime !== 'undefined' ? datetime : '2019-01-01 01:02:03.123456';
+
+    datetime = new Date(datetime).getTime();
+    const now = new Date().getTime();
+
+    if (isNaN(datetime)) {
+      return;
+    }
+
+    let milisec_diff: number;
+    if (datetime < now) {
+      milisec_diff = now - datetime;
+    } else {
+      milisec_diff = datetime - now;
+    }
+
+    const days = Math.floor(milisec_diff / 1000 / 60 / (60 * 24));
+    const date_diff = new Date(milisec_diff);
+    if (days < 1) { return `${date_diff.getHours()}u`; }
+    if (days >= 1) { return `${days}d`; }
   }
 }
