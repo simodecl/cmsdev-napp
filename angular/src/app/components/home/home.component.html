@@ -1,6 +1,13 @@
 <div class="main">
   <div *ngIf="selfies">
     <div *ngFor="let selfie of selfies; let i = index" class="card">
+      <div id="{{'delete' + selfie.id}}" class="modal">
+        <div class="modal-content">
+          <span (click)="closeModal(selfie.id)" class="close">&times;</span>
+          <p>Wil je deze foto verwijderen?</p>
+          <button class="button-comment button-delete" (click)="deleteSelfie(selfie.id)">Verwijderen</button>
+        </div>
+      </div>
       <div class="card-head">
         <div class="avatar-container">
           <img class="avatar" [src]="selfie._embedded.author[0].acf.avatar.url" />
@@ -8,6 +15,7 @@
         <div class="card-author">
           {{ selfie._embedded.author[0].name }}
         </div>
+        <div class="comment-delete delete-icon" *ngIf="selfie.author === currentUser.id" (click)="openModal(selfie.id)"><mat-icon>delete</mat-icon></div>
       </div>
       <div class="img-container">
         <img class="img" [src]="selfie._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url" />

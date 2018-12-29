@@ -25,6 +25,12 @@ export class CommentsService {
       catchError(this.handleError) // then handle the error
     );
   }
+  public deleteComment<T>(id): Observable<T> {
+    return this.http.delete<T>(`${environment.apiURL}/comments/${id}`)
+    .pipe(
+      catchError(this.handleError) // then handle the error
+    );
+  }
 
   private handleError(errorResponse: HttpErrorResponse) {
     if (errorResponse.error instanceof ErrorEvent) {

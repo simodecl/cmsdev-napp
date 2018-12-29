@@ -13,8 +13,10 @@ import { HeaderService } from 'src/app/services/header.service';
 export class ProfileSettingsComponent implements OnInit {
   selectedFile: File;
   fields: FormGroup;
+  placeholderImg = '/assets/placeholder.jpg';
   fieldsData;
   dateData;
+  user: User;
 
 
   constructor(
@@ -39,6 +41,10 @@ export class ProfileSettingsComponent implements OnInit {
 
   onFileChanged(event) {
     this.selectedFile = event.target.files[0];
+    const imgfields = document.querySelectorAll('.avatar');
+    for (let i = 0; i < imgfields.length; i++) {
+      imgfields[i].setAttribute('src', URL.createObjectURL(event.target.files[0]));
+    }
     console.log(this.selectedFile);
   }
 
@@ -99,6 +105,7 @@ export class ProfileSettingsComponent implements OnInit {
         goaldate: new Date(user.acf.goaldate),
         goalamount: user.acf.goalamount
       });
+      this.user = user;
       console.log(this.fields.value);
     }, err => {
       console.error(err);

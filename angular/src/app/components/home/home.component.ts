@@ -71,4 +71,22 @@ export class HomeComponent implements OnInit {
       console.error(err);
     });
   }
+
+  deleteSelfie(id) {
+    this.postService.deleteSelfie<Selfie>(id).subscribe(res => {
+      this.getCurrentUser();
+    }, err => {
+      console.error(err);
+    });
+  }
+
+  openModal(id) {
+    const modal = document.getElementById('delete' + id);
+    modal.style.display = 'block';
+  }
+
+  closeModal(id) {
+    const modal = document.getElementById('delete' + id);
+    modal.style.display = 'none';
+  }
 }

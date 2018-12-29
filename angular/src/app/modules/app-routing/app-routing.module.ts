@@ -8,6 +8,7 @@ import { ProfileSettingsComponent } from 'src/app/components/profiles/profile-se
 import { ProfileDetailComponent } from 'src/app/components/profiles/profile-detail/profile-detail.component';
 import { ProfilesComponent } from 'src/app/components/profiles/profiles.component';
 import { SelfieDetailComponent } from 'src/app/components/home/selfie-detail/selfie-detail.component';
+import { SelfieCreateComponent } from 'src/app/components/home/selfie-create/selfie-create.component';
 
 import { AuthGuardService as AuthGuard } from './../../services/auth-guard.service';
 
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'profile/:id/settings', component: ProfileSettingsComponent, canActivate: [AuthGuard] },
   { path: 'profiles', component: ProfilesComponent, canActivate: [AuthGuard] },
   { path: 'selfie/:id', component: SelfieDetailComponent, canActivate: [AuthGuard] },
+  { path: 'selfie/create', component: SelfieCreateComponent, canActivate: [AuthGuard] },
 
 ];
 

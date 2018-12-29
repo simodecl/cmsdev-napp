@@ -5,7 +5,7 @@ import { Comment } from 'src/app/models/comment';
 import { PostService } from 'src/app/services/post.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { HeaderService } from 'src/app/services/header.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommentsService } from 'src/app/services/comments.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -28,6 +28,7 @@ export class SelfieDetailComponent implements OnInit {
   constructor(
     private postService: PostService,
     private route: ActivatedRoute,
+    private router: Router,
     private authService: AuthService,
     private headerService: HeaderService,
     private commentsService: CommentsService,
@@ -68,9 +69,26 @@ export class SelfieDetailComponent implements OnInit {
       console.error(err);
     });
   }
+
+  deleteSelfie(id) {
+    this.postService.deleteSelfie<Selfie>(id).subscribe(res => {
+      this.router.navigate(['']);
+    }, err => {
+      console.error(err);
+    });
+  }
+
   getComments(id) {
     this.commentsService.getCommentsByPost<Comment>(id).subscribe(res => {
       this.comments = res;
+    }, err => {
+      console.error(err);
+    });
+  }
+
+  deleteComment(id) {
+    this.commentsService.deleteComment<Comment>(id).subscribe(res => {
+      this.getComments(this.postId);
     }, err => {
       console.error(err);
     });
@@ -152,5 +170,15 @@ export class SelfieDetailComponent implements OnInit {
     const date_diff = new Date(milisec_diff);
     if (days < 1) { return `${date_diff.getHours()}u`; }
     if (days >= 1) { return `${days}d`; }
+  }
+
+  openModal(id) {
+    const modal = document.getElementById('delete' + id);
+    modal.style.display = 'block';
+  }
+
+  closeModal(id) {
+    const modal = document.getElementById('delete' + id);
+    modal.style.display = 'none';
   }
 }

@@ -20,6 +20,7 @@ import { ProfileSettingsComponent } from './components/profiles/profile-settings
 import { TokenService } from './interceptor/token.service';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { SelfieDetailComponent } from './components/home/selfie-detail/selfie-detail.component';
+import { SelfieCreateComponent } from './components/home/selfie-create/selfie-create.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SelfieDetailComponent } from './components/home/selfie-detail/selfie-de
     ProfilesComponent,
     ProfileDetailComponent,
     ProfileSettingsComponent,
-    SelfieDetailComponent
+    SelfieDetailComponent,
+    SelfieCreateComponent
   ],
   imports: [
     BrowserModule,

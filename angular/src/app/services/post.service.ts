@@ -33,6 +33,13 @@ export class PostService {
     );
   }
 
+  public deleteSelfie<T>(id: string): Observable<T> {
+    return this.http.delete<T>(`${environment.apiURL}/selfie/${id}`)
+    .pipe(
+      catchError(this.handleError) // then handle the error
+    );
+  }
+
   public updateSelfie(data, id): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
