@@ -1,0 +1,48 @@
+@import "../../variables.scss";
+
+.main {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: $lightblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.text {
+  background-color: $blue;
+  width: 100vw;
+  padding: 30px;
+  margin-bottom: 30px;
+  color: $lightblue;
+}
+.text h4 {
+  color: $white;
+}
+
+.text div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 30px;
+}
+
+.image img {
+  width: 100%;
+  max-width: 500px;
+  display: block;
+  margin: 0 auto;
+}
+
+.image, .video {
+  width: 100vw;
+  margin-bottom: 30px;
+}
+
+.video iframe {
+  width: 100%;
+  height: 300px;
+  max-width: 500px;
+  display: block;
+  margin: 0 auto;
+}

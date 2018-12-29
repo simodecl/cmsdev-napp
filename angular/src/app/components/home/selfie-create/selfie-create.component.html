@@ -1,3 +1,20 @@
-<p>
-  selfie-create works!
-</p>
+<div class="main">
+  <img id="image" src="" />
+  <div *ngIf="errors" class="errors">
+      {{ errors }}
+  </div>
+  <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+  <button class="button button-img" (click)="fileInput.click()">Foto kiezen</button>
+  <form [formGroup]="postSelfie" class="form-settings" (ngSubmit)="createSelfie()">
+    <input style="display: none;" type="number" formControlName="featured_media" name="featured_media">
+    <div class="form-group">
+      <label for="title">Titel</label><br>
+      <input formControlName="title" name="title">
+    </div>
+    <div class="form-group">
+        <label for="hashtag">Hashtag</label><br>
+        <input formControlName="hashtag" name="hashtag">
+      </div>
+    <button type="submit" class="button-update button">Selfie posten</button>
+  </form>
+</div>

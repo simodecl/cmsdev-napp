@@ -9,34 +9,34 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class PostService {
-  errors;
+  errors: String;
 
   constructor(private http: HttpClient) { }
 
   public getSelfies<T>(): Observable<T> {
     return this.http.get<T>(`${environment.apiURL}/selfie?_embed`)
     .pipe(
-      catchError(this.handleError) // then handle the error
+      catchError(this.handleError)
     );
   }
 
   public getSelfiesByFollowing<T>(following: string): Observable<T> {
     return this.http.get<T>(`${environment.apiURL}/selfie?_embed&author=${following}`)
     .pipe(
-      catchError(this.handleError) // then handle the error
+      catchError(this.handleError)
     );
   }
   public getSelfieById<T>(id: string): Observable<T> {
     return this.http.get<T>(`${environment.apiURL}/selfie/${id}?_embed`)
     .pipe(
-      catchError(this.handleError) // then handle the error
+      catchError(this.handleError)
     );
   }
 
   public deleteSelfie<T>(id: string): Observable<T> {
     return this.http.delete<T>(`${environment.apiURL}/selfie/${id}`)
     .pipe(
-      catchError(this.handleError) // then handle the error
+      catchError(this.handleError)
     );
   }
 
@@ -48,7 +48,39 @@ export class PostService {
     };
     return this.http.post(`${environment.acfURL}/selfie/${id}`, data, httpOptions)
     .pipe(
-      catchError(this.handleError) // then handle the error
+      catchError(this.handleError)
+    );
+  }
+
+  public postSelfie(data): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post(`${environment.apiURL}/selfie`, data, httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public postHashtag(data): Observable<any> {
+    return this.http.post(`${environment.apiURL}/hashtag`, data)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public uploadFile(data): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Disposition': 'attachment; filename=profile.png',
+      })
+    };
+
+    return this.http.post(`${environment.apiURL}/media`, data, httpOptions)
+    .pipe(
+      catchError(this.handleError)
     );
   }
 

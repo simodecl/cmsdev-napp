@@ -1,0 +1,76 @@
+@import "../../variables.scss";
+
+.main {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: $lightblue;
+  display: flex;
+  flex-direction: column;
+}
+
+.question-group {
+  background-color: $blue;
+  padding: 15px;
+  box-shadow: 5px 5px 5px 0px $darkblue;
+  margin: 10px;
+  color: $white;
+}
+
+.question {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.radio-group {
+  position: relative;
+  display: block;
+  margin-bottom: 15px;
+  padding-left: 30px;
+  cursor: pointer;
+}
+
+.radio-group input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.radio-indicator {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: #e6e6e6;
+}
+
+.radio-group .radio-indicator {
+  border-radius: 50%;
+}
+
+/* Checked state */
+.radio-group input:checked ~ .radio-indicator {
+  background: $darkblue;
+}
+
+
+/* Check mark */
+.radio-indicator:after {
+  position: absolute;
+  display: none;
+  content: '';
+}
+
+/* Show check mark */
+.radio-group input:checked ~ .radio-indicator:after {
+  display: block;
+}
+
+/* Radio button inner circle */
+.radio-group .radio-indicator:after {
+  top: 7px;
+  left: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+}

@@ -21,6 +21,8 @@ import { TokenService } from './interceptor/token.service';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { SelfieDetailComponent } from './components/home/selfie-detail/selfie-detail.component';
 import { SelfieCreateComponent } from './components/home/selfie-create/selfie-create.component';
+import { TipsComponent } from './components/tips/tips.component';
+import { QuizComponent } from './components/quiz/quiz.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { SelfieCreateComponent } from './components/home/selfie-create/selfie-cr
     ProfileDetailComponent,
     ProfileSettingsComponent,
     SelfieDetailComponent,
-    SelfieCreateComponent
+    SelfieCreateComponent,
+    TipsComponent,
+    QuizComponent
   ],
   imports: [
     BrowserModule,

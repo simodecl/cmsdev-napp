@@ -9,6 +9,8 @@ import { ProfileDetailComponent } from 'src/app/components/profiles/profile-deta
 import { ProfilesComponent } from 'src/app/components/profiles/profiles.component';
 import { SelfieDetailComponent } from 'src/app/components/home/selfie-detail/selfie-detail.component';
 import { SelfieCreateComponent } from 'src/app/components/home/selfie-create/selfie-create.component';
+import { TipsComponent } from 'src/app/components/tips/tips.component';
+import { QuizComponent } from 'src/app/components/quiz/quiz.component';
 
 import { AuthGuardService as AuthGuard } from './../../services/auth-guard.service';
 
@@ -19,8 +21,10 @@ const routes: Routes = [
   { path: 'profile/:id', component: ProfileDetailComponent, canActivate: [AuthGuard] },
   { path: 'profile/:id/settings', component: ProfileSettingsComponent, canActivate: [AuthGuard] },
   { path: 'profiles', component: ProfilesComponent, canActivate: [AuthGuard] },
-  { path: 'selfie/:id', component: SelfieDetailComponent, canActivate: [AuthGuard] },
   { path: 'selfie/create', component: SelfieCreateComponent, canActivate: [AuthGuard] },
+  { path: 'selfie/:id', component: SelfieDetailComponent, canActivate: [AuthGuard] },
+  { path: 'tips', component: TipsComponent, canActivate: [AuthGuard] },
+  { path: 'quiz', component: QuizComponent, canActivate: [AuthGuard] },
 
 ];
 

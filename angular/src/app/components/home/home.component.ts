@@ -4,6 +4,7 @@ import { HeaderService } from 'src/app/services/header.service';
 import { PostService } from 'src/app/services/post.service';
 import { User } from 'src/app/models/user';
 import { Selfie } from 'src/app/models/selfie';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -14,15 +15,25 @@ export class HomeComponent implements OnInit {
   currentUser: User;
   following: string;
   selfies: Selfie[];
+  selectedFile: File;
+  postSelfie: FormGroup;
+  errors: String;
 
   constructor(
     private headerService: HeaderService,
     private postService: PostService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
     setTimeout(() => {
       this.headerService.setTitle('Tijdlijn');
+    });
+    this.postSelfie = this.fb.group({
+      featured_media: [],
+      hashtag: [],
+      title: [''],
+      status: ['pending']
     });
     this.getCurrentUser();
   }

@@ -1,0 +1,9 @@
+<div class="main">
+  <section class="question-group" *ngFor="let question of questions">
+    <div class="question">{{ question.content }}</div>
+    <label class="radio-group" *ngFor="let option of question.options">{{ option.content }}
+      <input type="radio" [value]="option.value" [name]="question.name"/>
+      <div class="radio-indicator"></div>
+    </label>
+  </section>
+</div>

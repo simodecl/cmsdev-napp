@@ -1,4 +1,5 @@
 <div class="main">
+  <a [routerLink]="['/selfie/create']" class="button-post">Selfie posten</a>
   <div *ngIf="selfies">
     <div *ngFor="let selfie of selfies; let i = index" class="card">
       <div id="{{'delete' + selfie.id}}" class="modal">
