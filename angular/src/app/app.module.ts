@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { MomentModule } from 'ngx-moment';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -23,6 +24,7 @@ import { SelfieDetailComponent } from './components/home/selfie-detail/selfie-de
 import { SelfieCreateComponent } from './components/home/selfie-create/selfie-create.component';
 import { TipsComponent } from './components/tips/tips.component';
 import { QuizComponent } from './components/quiz/quiz.component';
+import { TrackingComponent } from './components/tracking/tracking.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { QuizComponent } from './components/quiz/quiz.component';
     SelfieDetailComponent,
     SelfieCreateComponent,
     TipsComponent,
-    QuizComponent
+    QuizComponent,
+    TrackingComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { QuizComponent } from './components/quiz/quiz.component';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MomentModule
   ],
   providers: [
     SidenavService,

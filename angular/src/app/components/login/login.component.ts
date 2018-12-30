@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     public router: Router) { }
 
   ngOnInit() {
-    localStorage.clear();
+    localStorage.removeItem('token');
   }
   login() {
     const data = {

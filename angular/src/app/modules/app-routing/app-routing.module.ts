@@ -11,6 +11,7 @@ import { SelfieDetailComponent } from 'src/app/components/home/selfie-detail/sel
 import { SelfieCreateComponent } from 'src/app/components/home/selfie-create/selfie-create.component';
 import { TipsComponent } from 'src/app/components/tips/tips.component';
 import { QuizComponent } from 'src/app/components/quiz/quiz.component';
+import { TrackingComponent } from 'src/app/components/tracking/tracking.component';
 
 import { AuthGuardService as AuthGuard } from './../../services/auth-guard.service';
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'selfie/:id', component: SelfieDetailComponent, canActivate: [AuthGuard] },
   { path: 'tips', component: TipsComponent, canActivate: [AuthGuard] },
   { path: 'quiz', component: QuizComponent, canActivate: [AuthGuard] },
+  { path: 'tracking', component: TrackingComponent, canActivate: [AuthGuard] },
 
 ];
 
