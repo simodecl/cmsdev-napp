@@ -2,6 +2,12 @@ export class Media {
   id: number;
   author: number;
   media_details: MediaDetails;
+  title: Rendered;
+  caption: Rendered;
+}
+
+export class Rendered {
+  rendered: String;
 }
 
 export class MediaDetails {
@@ -16,5 +22,5 @@ export class Sizes {
 }
 
 export class SizeURL {
-  soure_url: string;
+  source_url: string;
 }

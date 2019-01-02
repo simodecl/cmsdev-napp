@@ -8,23 +8,23 @@
       <h3 class="name">{{ profile.name }}</h3>
       <p *ngIf="profile.acf.school">{{ profile.acf.school }}</p>
     </div>
-    <div *ngIf="currentUser.id == profile.id; else unfollowTemplate">
+    <div *ngIf="currentUser.id === profile.id">
       <a [routerLink]="['/profile', currentUser.id, 'settings']">
         <button class="button-follow">
             <mat-icon>settings</mat-icon>
         </button>
       </a>
     </div>
-    <ng-template #unfollowTemplate *ngIf="currentUser.acf.following.includes(profile.id); else followTemplate">
+    <div *ngIf="currentUser.acf.following.includes(profile.id) && currentUser.id !== profile.id">
       <button (click)="unfollow(profile.id)" class="button-follow">
         <mat-icon>person_add_disabled</mat-icon>
       </button>
-    </ng-template>
-    <ng-template #followTemplate *ngIf="currentUser.id !== profile.id">
+    </div>
+    <div *ngIf="!currentUser.acf.following.includes(profile.id) && currentUser.id !== profile.id">
       <button (click)="follow(profile.id)" class="button-follow">
         <mat-icon>person_add</mat-icon>
       </button>
-    </ng-template>
+    </div>
   </div>
   <div class="content-group">
     <h3 class="content-title">Slaapdoel</h3>

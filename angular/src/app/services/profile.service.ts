@@ -59,6 +59,13 @@ export class ProfileService {
     );
   }
 
+  public getMediaById<T>(id: string): Observable<T> {
+    return this.http.get<T>(`${environment.apiURL}/media/${id}`)
+    .pipe(
+      catchError(this.handleError) // then handle the error
+    );
+  }
+
   private handleError(errorResponse: HttpErrorResponse) {
     if (errorResponse.error instanceof ErrorEvent) {
       console.error('Client side error: ', errorResponse.error.message);
