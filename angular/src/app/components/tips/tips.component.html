@@ -3,6 +3,6 @@
     <div *ngIf="tip.acf.type === 'Text'"><h4>Tip</h4><p>{{tip.acf.text}}</p>
     </div>
     <img *ngIf="tip.acf.type === 'Image'" src="{{tip.acf.image}}" alt="">
-    <iframe *ngIf="tip.acf.type === 'Video'" [src]="trustSrcUrl(tip.acf.video)" frameborder="0" allowfullscreen></iframe>
+    <iframe *ngIf="tip.acf.type === 'Video'" [src]="sanitize(tip.acf.video)" frameborder="0" allowfullscreen></iframe>
   </div>
 </div>

@@ -34,10 +34,6 @@ export class RegisterComponent implements OnInit {
       email: this.email,
       password: this.password,
     };
-    // const formData = new FormData();
-    // for (const key of Object.keys(data)) {
-    //   formData.append(key, data[key]);
-    // }
 
     if (this.password === this.password2) {
       console.log(data);
@@ -49,9 +45,6 @@ export class RegisterComponent implements OnInit {
       error => {
         this.errors = error;
         console.log(this.errors);
-      },
-      () => {
-        // Route to new page
       });
     } else {
       this.errors = 'De wachtwoorden komen niet overeen';

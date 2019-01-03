@@ -27,7 +27,6 @@ export class TrackingComponent implements OnInit {
     setTimeout(() => {
       this.headerService.setTitle('Slaapgegevens invullen');
     });
-    // console.log(moment('27/12/2018 10:00 am', 'DD/MM/YYYY h:mm a').format());
     this.trackingForm = this.fb.group({
       startdate: ['', Validators.required],
       starttime: ['', Validators.required],
@@ -49,14 +48,11 @@ export class TrackingComponent implements OnInit {
   }
 
   postTracking() {
-    console.log(this.trackingForm.value);
     const starttime = this.trackingForm.value.starttime.split(':');
     const startdate = moment(this.trackingForm.value.startdate).add({ hours: starttime[0], minutes: starttime[1]}).format('MM/DD/YYYY h:mm a');
-    console.log(startdate);
-
     const endtime = this.trackingForm.value.endtime.split(':');
     const enddate = moment(this.trackingForm.value.enddate).add({ hours: endtime[0], minutes: endtime[1]}).format('MM/DD/YYYY h:mm a');
-    console.log(enddate);
+
     const data = {
       'fields': {
         'sleep_start': startdate.toString(),

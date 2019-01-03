@@ -12,7 +12,7 @@ import { HeaderService } from './services/header.service';
 })
 export class AppComponent implements OnInit {
   title = '';
-  currentUser;
+  currentUser: number;
 
   @ViewChild('sidenav') public sidenav: MatSidenav;
   showHead = false;

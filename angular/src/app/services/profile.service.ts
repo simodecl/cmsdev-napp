@@ -43,7 +43,7 @@ export class ProfileService {
 
     return this.http.post(`${environment.apiURL}/media`, data, httpOptions)
     .pipe(
-      catchError(this.handleError) // then handle the error
+      catchError(this.handleError)
     );
   }
 
@@ -55,14 +55,14 @@ export class ProfileService {
     };
     return this.http.post(`${environment.acfURL}/users/${id}`, data, httpOptions)
     .pipe(
-      catchError(this.handleError) // then handle the error
+      catchError(this.handleError)
     );
   }
 
   public getMediaById<T>(id: string): Observable<T> {
     return this.http.get<T>(`${environment.apiURL}/media/${id}`)
     .pipe(
-      catchError(this.handleError) // then handle the error
+      catchError(this.handleError)
     );
   }
 

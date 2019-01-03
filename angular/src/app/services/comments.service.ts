@@ -8,27 +8,27 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CommentsService {
-  errors;
+  errors: String;
 
   constructor(private http: HttpClient) { }
 
-  public getCommentsByPost<T>(id): Observable<T> {
+  public getCommentsByPost<T>(id: number): Observable<T> {
     return this.http.get<T>(`${environment.apiURL}/comments?_embed&post=${id}`)
     .pipe(
-      catchError(this.handleError) // then handle the error
+      catchError(this.handleError)
     );
   }
 
-  public postComment<T>(data): Observable<T> {
+  public postComment<T>(data: object): Observable<T> {
     return this.http.post<T>(`${environment.apiURL}/comments`, data)
     .pipe(
-      catchError(this.handleError) // then handle the error
+      catchError(this.handleError)
     );
   }
-  public deleteComment<T>(id): Observable<T> {
+  public deleteComment<T>(id: number): Observable<T> {
     return this.http.delete<T>(`${environment.apiURL}/comments/${id}`)
     .pipe(
-      catchError(this.handleError) // then handle the error
+      catchError(this.handleError)
     );
   }
 

@@ -25,6 +25,10 @@ export class TipsComponent implements OnInit {
     this.getTips();
   }
 
+  sanitize(url) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
   getTips() {
     this.tipsService.getTips<Tip[]>().subscribe(res => {
       this.tips = res;
@@ -33,7 +37,4 @@ export class TipsComponent implements OnInit {
     });
   }
 
-  trustSrcUrl(url) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-  }
 }
