@@ -25,6 +25,8 @@ import { SelfieCreateComponent } from './components/home/selfie-create/selfie-cr
 import { TipsComponent } from './components/tips/tips.component';
 import { QuizComponent } from './components/quiz/quiz.component';
 import { TrackingComponent } from './components/tracking/tracking.component';
+import { StatsComponent } from './components/stats/stats.component';
+import { SelfieHashtagComponent } from './components/home/selfie-hashtag/selfie-hashtag.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { TrackingComponent } from './components/tracking/tracking.component';
     SelfieCreateComponent,
     TipsComponent,
     QuizComponent,
-    TrackingComponent
+    TrackingComponent,
+    StatsComponent,
+    SelfieHashtagComponent
   ],
   imports: [
     BrowserModule,

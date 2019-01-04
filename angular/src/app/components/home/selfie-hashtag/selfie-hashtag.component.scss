@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+@import "../../../variables.scss";
 
 .main {
   min-height: 100vh;
@@ -53,10 +53,9 @@
   margin-right: 5px;
 }
 
-.card-tag a {
+.card-tag {
   color: $lightblue;
   margin-right: 5px;
-  text-decoration: none;
 }
 
 .img-container img {
@@ -164,13 +163,6 @@
   margin-bottom: 0;
   margin-top: 15px;
   padding: 10px;
-  color: $white;
-  background-color: $darkblue;
-  border: solid 1px $blue;
-  border-radius: 2px;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
 .delete-icon {

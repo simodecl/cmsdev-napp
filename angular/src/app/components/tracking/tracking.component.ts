@@ -61,14 +61,22 @@ export class TrackingComponent implements OnInit {
         'sleep_rest': this.trackingForm.value.rested
       }
     };
-    this.trackingService.postEmptyTracking().subscribe(res => {
-      this.trackingService.updateTracking(data, res.id).subscribe(result => {
-        console.log(result);
-      }, error => {
-        console.log(error);
-        this.errors = error;
-      });
-    });
+    if (this.trackingForm.valid) {
+      if (moment(enddate).isSameOrAfter(startdate)) {
+        this.trackingService.postEmptyTracking().subscribe(res => {
+          this.trackingService.updateTracking(data, res.id).subscribe(result => {
+            console.log(result);
+          }, error => {
+            console.log(error);
+            this.errors = error;
+          });
+        });
+      } else {
+        this.errors = 'De einddatum moet na de startdatum plaatsvinden.';
+      }
+    } else {
+      this.errors = 'Je moet alle velden invullen.';
+    }
   }
 
 }

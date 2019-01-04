@@ -20,6 +20,13 @@ export class TipsService {
     );
   }
 
+  public getTextTips<T>(): Observable<T> {
+    return this.http.get<T>(`${environment.apiURL}/tips?type=24`)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(errorResponse: HttpErrorResponse) {
     if (errorResponse.error instanceof ErrorEvent) {
       console.error('Client side error: ', errorResponse.error.message);

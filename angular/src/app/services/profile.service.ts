@@ -17,20 +17,28 @@ export class ProfileService {
   public getCurrentUser<T>(): Observable<T> {
     return this.http.get<T>(`${environment.apiURL}/users/me`)
     .pipe(
-      catchError(this.handleError) // then handle the error
+      catchError(this.handleError)
     );
   }
 
   public getUsers<T>(): Observable<T> {
     return this.http.get<T>(`${environment.apiURL}/users`)
     .pipe(
-      catchError(this.handleError) // then handle the error
+      catchError(this.handleError)
     );
   }
+
+  public searchUsers<T>(query: String): Observable<T> {
+    return this.http.get<T>(`${environment.apiURL}/users?search=${query}`)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   public getUserById<T>(id: string): Observable<T> {
     return this.http.get<T>(`${environment.apiURL}/users/${id}`)
     .pipe(
-      catchError(this.handleError) // then handle the error
+      catchError(this.handleError)
     );
   }
 

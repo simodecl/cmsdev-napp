@@ -1,0 +1,36 @@
+@import "../../variables.scss";
+
+.main {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: $lightblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.doughnut-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.doughnut-container * {
+  width: 50vw;
+}
+
+.chart-advice {
+  margin: 0 auto;
+  background-color: $blue;
+  color: $lightblue;
+  padding: 10px;
+  font-size: 0.75rem;
+  border: solid 1px $blue;
+  border-radius: 2px;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.chart-title {
+  margin: 40px 0 20px;
+}

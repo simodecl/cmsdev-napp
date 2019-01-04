@@ -33,6 +33,13 @@ export class PostService {
     );
   }
 
+  public getSelfieByFollowingAndHashtag<T>(following: string, id: string): Observable<T> {
+    return this.http.get<T>(`${environment.apiURL}/selfie?author=${following}&hashtag=${id}&_embed`)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   public deleteSelfie<T>(id: string): Observable<T> {
     return this.http.delete<T>(`${environment.apiURL}/selfie/${id}`)
     .pipe(

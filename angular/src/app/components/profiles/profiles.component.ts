@@ -3,6 +3,7 @@ import { HeaderService } from 'src/app/services/header.service';
 import { User } from 'src/app/models/user';
 import { ProfileService } from 'src/app/services/profile.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-profiles',
@@ -13,15 +14,20 @@ export class ProfilesComponent implements OnInit {
   profiles: User[];
   placeholderImg = '/assets/placeholder.jpg';
   currentUser: User;
+  search: FormGroup;
 
   constructor(
     private headerService: HeaderService,
     private profileService: ProfileService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
     setTimeout(() => {
       this.headerService.setTitle('Profielen');
+    });
+    this.search = this.fb.group({
+      input: [''],
     });
     this.getCurrentUser();
     this.getProfiles();
@@ -39,7 +45,16 @@ export class ProfilesComponent implements OnInit {
   getProfiles() {
     this.profileService.getUsers<User[]>().subscribe(res => {
       this.profiles = res;
-      console.log(this.profiles);
+      console.log(res);
+    }, err => {
+      console.error(err);
+    });
+  }
+
+  searchProfiles(query: String) {
+    this.profileService.searchUsers<User[]>(query).subscribe(res => {
+      this.profiles = res;
+      console.log(res);
     }, err => {
       console.error(err);
     });

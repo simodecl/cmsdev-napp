@@ -13,7 +13,7 @@ export class TrackingService {
   constructor(private http: HttpClient) { }
 
   public getTrackingsByUser<T>(id: number): Observable<T> {
-    return this.http.get<T>(`${environment.apiURL}/tracking?author=${id}$page_limit=7`)
+    return this.http.get<T>(`${environment.apiURL}/sleeptracking?author=${id}&per_page=7`)
     .pipe(
       catchError(this.handleError)
     );

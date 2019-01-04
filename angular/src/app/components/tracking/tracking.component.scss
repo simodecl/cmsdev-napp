@@ -128,3 +128,17 @@
   font-weight: bold;
   color: $darkblue;
 }
+
+.errors {
+  width: 300px;
+  margin: 0 auto;
+  background-color: $blue;
+  color: $lightblue;
+  padding: 10px;
+  font-size: 0.75rem;
+  border: solid 1px $blue;
+  border-radius: 2px;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}

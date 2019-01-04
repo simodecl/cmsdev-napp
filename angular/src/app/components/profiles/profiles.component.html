@@ -1,4 +1,10 @@
 <div class="main" *ngIf="profiles && currentUser">
+  <div class="search-container">
+      <form class="search-bar">
+          <input #searchinput>
+          <mat-icon (click)="searchProfiles(searchinput.value)">search</mat-icon>
+      </form>
+  </div>
   <div class="profile" *ngFor="let profile of profiles">
     <div class="profile-head" *ngIf="profile && profile.id !== currentUser.id">
       <a [routerLink]="['/profile', profile.id]">

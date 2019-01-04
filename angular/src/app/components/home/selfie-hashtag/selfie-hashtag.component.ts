@@ -5,13 +5,14 @@ import { PostService } from 'src/app/services/post.service';
 import { User } from 'src/app/models/user';
 import { Selfie } from 'src/app/models/selfie';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-selfie-hashtag',
+  templateUrl: './selfie-hashtag.component.html',
+  styleUrls: ['./selfie-hashtag.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class SelfieHashtagComponent implements OnInit {
   currentUser: User;
   following: string;
   selfies: Selfie[];
@@ -23,12 +24,10 @@ export class HomeComponent implements OnInit {
     private headerService: HeaderService,
     private postService: PostService,
     private authService: AuthService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.headerService.setTitle('Tijdlijn');
-    });
     this.postSelfie = this.fb.group({
       featured_media: [],
       hashtag: [],
@@ -36,21 +35,26 @@ export class HomeComponent implements OnInit {
       status: ['pending']
     });
     this.getCurrentUser();
+
   }
   getCurrentUser() {
     this.authService.getCurrentUser<User>().subscribe(user => {
       this.currentUser = user;
-      const authors = user.acf.following.toString() + ',' + user.id.toString();
-      this.getSelfies(authors);
+      console.log(user);
+      this.route.params.subscribe(param => {
+        const authors = user.acf.following.toString() + ',' + user.id.toString();
+        this.getSelfies(authors, param.id.toString());
+      });
     }, err => {
       console.error(err);
     });
   }
 
-  getSelfies(following) {
-    this.postService.getSelfiesByFollowing<Selfie[]>(following).subscribe(selfies => {
+  getSelfies(following: string, hashtag: string) {
+    this.postService.getSelfieByFollowingAndHashtag<Selfie[]>(following, hashtag).subscribe(selfies => {
       this.selfies = selfies;
       console.log(this.selfies);
+      this.headerService.setTitle('#' + this.selfies[0]._embedded['wp:term'][0][0].name);
     }, err => {
       console.error(err);
     });

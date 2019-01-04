@@ -1,5 +1,6 @@
 <div class="main" *ngIf="user">
   <div class="title">Vul je slaapgegevens in van afgelopen nacht!</div>
+  <div *ngIf="errors" class="errors">{{ errors }}</div>
   <form [formGroup]="trackingForm" class="form-settings" (ngSubmit)="postTracking()">
     <div class="date-group">
       <label for="startdate">Gaan slapen op:</label><br>
