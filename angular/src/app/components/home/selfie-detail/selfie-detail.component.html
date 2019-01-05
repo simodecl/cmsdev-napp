@@ -42,7 +42,7 @@
       <a [routerLink]="['/selfie', selfie.id]" class="comments"><mat-icon>comment</mat-icon>Reageren</a>
     </div>
   </div>
-  <form [formGroup]="commentForm" class="comment-form" (ngSubmit)="postComment(0)">
+  <form [formGroup]="commentForm" class="comment-form" (ngSubmit)="postComment()">
     <div class="form-group">
       <textarea formControlName="content" name="content"></textarea>
       <button class="button-comment" type="submit">Reageren</button>

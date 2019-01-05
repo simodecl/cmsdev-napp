@@ -17,12 +17,19 @@
         <h3 class="name">{{ profile.name }}</h3>
         <p *ngIf="profile.acf.school">{{ profile.acf.school }}</p>
       </div>
-      <div *ngIf="currentUser.acf.following.includes(profile.id)">
-        <button (click)="unfollow(profile.id)" class="button-follow">
-          <mat-icon>person_add_disabled</mat-icon>
-        </button>
+      <div *ngIf="currentUser.acf.following">
+        <div *ngIf="currentUser.acf.following.includes(profile.id)">
+          <button (click)="unfollow(profile.id)" class="button-follow">
+            <mat-icon>person_add_disabled</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="!currentUser.acf.following.includes(profile.id)">
+          <button (click)="follow(profile.id)" class="button-follow">
+            <mat-icon>person_add</mat-icon>
+          </button>
+        </div>
       </div>
-      <div *ngIf="!currentUser.acf.following.includes(profile.id)">
+      <div *ngIf="!currentUser.acf.following">
         <button (click)="follow(profile.id)" class="button-follow">
           <mat-icon>person_add</mat-icon>
         </button>

@@ -5,6 +5,8 @@ import { ProfileService } from 'src/app/services/profile.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TrackingService } from 'src/app/services/tracking.service';
 import * as moment from 'moment';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tracking',
@@ -20,7 +22,8 @@ export class TrackingComponent implements OnInit {
     private profileService: ProfileService,
     private fb: FormBuilder,
     private headerService: HeaderService,
-    private trackingService: TrackingService
+    private trackingService: TrackingService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -66,6 +69,7 @@ export class TrackingComponent implements OnInit {
         this.trackingService.postEmptyTracking().subscribe(res => {
           this.trackingService.updateTracking(data, res.id).subscribe(result => {
             console.log(result);
+            this.router.navigate(['stats']);
           }, error => {
             console.log(error);
             this.errors = error;

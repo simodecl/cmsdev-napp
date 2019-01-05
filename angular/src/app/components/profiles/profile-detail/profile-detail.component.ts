@@ -74,10 +74,16 @@ export class ProfileDetailComponent implements OnInit {
   }
 
   follow(id) {
-    const newFollow = this.currentUser.acf.following;
-    if (newFollow.includes(id)) {
-      newFollow.filter(e => e !== id);
+    let newFollow;
+    if (this.currentUser.acf.following) {
+        newFollow = this.currentUser.acf.following;
+      if (newFollow.includes(id)) {
+        newFollow.filter(e => e !== id);
+      } else {
+        newFollow.push(id);
+      }
     } else {
+      newFollow = [];
       newFollow.push(id);
     }
     const settings = {

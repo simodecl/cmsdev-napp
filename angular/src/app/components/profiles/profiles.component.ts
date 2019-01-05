@@ -61,10 +61,16 @@ export class ProfilesComponent implements OnInit {
   }
 
   follow(id) {
-    const newFollow = this.currentUser.acf.following;
-    if (newFollow.includes(id)) {
-      newFollow.filter(e => e !== id);
+    let newFollow;
+    if (this.currentUser.acf.following) {
+        newFollow = this.currentUser.acf.following;
+      if (newFollow.includes(id)) {
+        newFollow.filter(e => e !== id);
+      } else {
+        newFollow.push(id);
+      }
     } else {
+      newFollow = [];
       newFollow.push(id);
     }
     const settings = {
@@ -74,6 +80,7 @@ export class ProfilesComponent implements OnInit {
     };
     this.profileService.updateSettings(settings, this.currentUser.id).subscribe(res => {
       console.log(res);
+      this.getProfiles();
     }, err => {
       console.error(err);
     });
