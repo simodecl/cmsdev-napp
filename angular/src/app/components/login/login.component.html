@@ -6,14 +6,14 @@
   <div *ngIf="errors" class="errors">
     {{ errors }}
   </div>
-  <form class="form-login" (ngSubmit)="login()">
+  <form class="form-login" [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="form-group">
       <label for="username">Gebruikersnaam</label><br>
-      <input type="username" name="username" [(ngModel)]="username">
+      <input type="username" name="username" formControlName="username">
     </div>
     <div class="form-group">
       <label for="password">Wachtwoord</label><br>
-      <input type="password" name="password" [(ngModel)]="password">
+      <input type="password" name="password" formControlName="password">
     </div>
     <button class="button-login">AANMELDEN</button>
   </form>

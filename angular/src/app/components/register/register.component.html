@@ -6,30 +6,30 @@
   <div *ngIf="errors" class="errors">
       {{ errors }}
   </div>
-  <form class="form-register" (ngSubmit)="register()">
+  <form class="form-register" [formGroup]="registerForm" (ngSubmit)="register()">
     <div class="form-group">
       <label for="username">Gebruikersnaam</label><br>
-      <input type="username" name="username" [(ngModel)]="username">
+      <input type="username" name="username" formControlName="username">
     </div>
     <div class="form-group">
       <label for="firstname">Voornaam</label><br>
-      <input type="firstname" name="firstname" [(ngModel)]="firstname">
+      <input type="firstname" name="firstname" formControlName="firstname">
     </div>
     <div class="form-group">
       <label for="lastname">Achternaam</label><br>
-      <input type="lastname" name="lastname" [(ngModel)]="lastname">
+      <input type="lastname" name="lastname" formControlName="lastname">
     </div>
     <div class="form-group">
       <label for="email">E-mail</label><br>
-      <input type="email" name="email" [(ngModel)]="email">
+      <input type="email" name="email" formControlName="email">
     </div>
     <div class="form-group">
       <label for="password">Wachtwoord</label><br>
-      <input type="password" name="password" [(ngModel)]="password">
+      <input type="password" name="password" formControlName="password">
     </div>
     <div class="form-group">
       <label for="password2">Wachtwoord opnieuw invoeren</label><br>
-      <input type="password" name="password2" [(ngModel)]="password2">
+      <input type="password" name="password2" formControlName="password2">
     </div>
     <button class="button-register">REGISTREREN</button>
   </form>
