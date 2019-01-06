@@ -7,14 +7,15 @@
       <div class="radio-indicator"></div>
     </label>
   </section>
-  <button (click)="getResult()">Bekijk resultaat</button>
+  <div class="errors" *ngIf="errors">{{ errors }}</div>
+  <button class="button-post" (click)="getResult()">Bekijk resultaat</button>
   <div id="modal" class="modal">
       <div *ngIf="type" class="modal-content">
         <span (click)="closeModal()" class="close">&times;</span>
         <h4>{{ type.title.rendered }}</h4>
         <p [innerHTML]="type.caption.rendered"></p>
         <img class="modal-image" [src]="type.media_details.sizes.thumbnail.source_url">
-        <button class="button-comment button-delete" (click)="updateProfile()">Profiel bijwerken</button>
+        <button class="button-post" (click)="updateProfile()">Profiel bijwerken</button>
       </div>
     </div>
 </div>

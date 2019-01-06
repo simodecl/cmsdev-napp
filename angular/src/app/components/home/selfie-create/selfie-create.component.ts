@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderService } from 'src/app/services/header.service';
 import { PostService } from 'src/app/services/post.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-selfie-create',
@@ -16,7 +17,8 @@ export class SelfieCreateComponent implements OnInit {
   constructor(
     private headerService: HeaderService,
     private postService: PostService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private router: Router) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -58,6 +60,7 @@ export class SelfieCreateComponent implements OnInit {
             });
             this.postService.postSelfie(this.postSelfie.value).subscribe(newSelfie => {
               console.log(newSelfie);
+              this.router.navigate(['']);
             }, error => {
               console.log(error);
               this.errors = error;

@@ -56,6 +56,8 @@
   padding: 15px;
   margin-bottom: 15px;
   color: $darkblue;
+  display: flex;
+  flex-direction: column;
 }
 
 .content-title {
@@ -69,4 +71,18 @@
 
 .following {
   margin: 5px;
+}
+
+.button {
+  padding: 15px;
+  color: $white;
+  background-color: $darkblue;
+  border: solid 1px $blue;
+  border-radius: 2px;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+  text-decoration: none;
+  margin-top: 10px;
+  width: 100px;
 }

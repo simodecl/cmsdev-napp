@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   selectedFile: File;
   postSelfie: FormGroup;
   errors: String;
+  placeholderImg = '/assets/placeholder.jpg';
 
   constructor(
     private headerService: HeaderService,
@@ -40,8 +41,12 @@ export class HomeComponent implements OnInit {
   getCurrentUser() {
     this.authService.getCurrentUser<User>().subscribe(user => {
       this.currentUser = user;
-      const authors = user.acf.following.toString() + ',' + user.id.toString();
-      this.getSelfies(authors);
+      if (user.acf.following) {
+        const authors = user.acf.following.toString() + ',' + user.id.toString();
+        this.getSelfies(authors);
+      } else {
+        this.getSelfies(user.id.toString());
+      }
     }, err => {
       console.error(err);
     });

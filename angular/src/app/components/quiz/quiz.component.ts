@@ -193,7 +193,7 @@ export class QuizComponent implements OnInit {
 
   getTypeFromResult() {
     let type: String;
-    if (this.result = 18) {
+    if (this.result === 18) {
       type = 'King of sleep';
       this.getTypeMedia(128);
     }

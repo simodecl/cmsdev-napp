@@ -75,108 +75,108 @@ export class StatsComponent implements OnInit {
         this.deeps.unshift(+tracking.acf.sleep_deep);
         this.rests.unshift(+tracking.acf.sleep_rest);
       });
+      if ( this.dates.length > 1 && this.deeps.length > 1 && this.rests.length > 1 ) {
+        let deepAvg = this.deeps.reduce((previous, current) => current += previous);
+        deepAvg = deepAvg / this.deeps.length;
+        console.log(deepAvg);
+        if (deepAvg < 3.75) { this.deepTip = this.tips[Math.floor(Math.random() * this.tips.length)].acf.text; }
 
-      let deepAvg = this.deeps.reduce((previous, current) => current += previous);
-      deepAvg = deepAvg / this.deeps.length;
-      console.log(deepAvg);
-      if (deepAvg < 3.75) { this.deepTip = this.tips[Math.floor(Math.random() * this.tips.length)].acf.text; }
-
-      let restAvg = this.rests.reduce((previous, current) => current += previous);
-      restAvg = restAvg / this.deeps.length;
-      console.log(restAvg);
-      if (restAvg < 3.75) { this.restTip = this.tips[Math.floor(Math.random() * this.tips.length)].acf.text; }
-
-      const ctx = this.amountRef.nativeElement.getContext('2d');
-      const ctxDeep = this.deepRef.nativeElement.getContext('2d');
-      const ctxRest = this.restRef.nativeElement.getContext('2d');
-      this.amountchart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: this.dates,
-          datasets: [
-            {
-              data: this.amounts,
-              borderColor: '#4D648D',
-              fill: false
-            }
-          ]
-        },
-        options: {
-          legend: {
-            display: false,
-          },
-          scales: {
-            xAxes: [{
-              display: true,
-              ticks: {
-                fontColor: '#4D648D'
-            },
-            }],
-            yAxes: [{
-              display: true,
-              ticks: {
-                beginAtZero: true,
-                fontColor: '#4D648D',
-                callback: function(label, index, labels) {
-                  return label + ' uur';
+        let restAvg = this.rests.reduce((previous, current) => current += previous);
+        restAvg = restAvg / this.deeps.length;
+        console.log(restAvg);
+        if (restAvg < 3.75) { this.restTip = this.tips[Math.floor(Math.random() * this.tips.length)].acf.text; }
+        const ctx = this.amountRef.nativeElement.getContext('2d');
+        const ctxDeep = this.deepRef.nativeElement.getContext('2d');
+        const ctxRest = this.restRef.nativeElement.getContext('2d');
+        this.amountchart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: this.dates,
+            datasets: [
+              {
+                data: this.amounts,
+                borderColor: '#4D648D',
+                fill: false
               }
+            ]
+          },
+          options: {
+            legend: {
+              display: false,
             },
-            }],
-          }
-        }
-      });
-      this.deepchart = new Chart(ctxDeep, {
-        type: 'doughnut',
-        data: {
-          labels: ['Gemiddelde Uitgerustheid'],
-          datasets: [
-            {
-              data: [deepAvg, 5 - deepAvg],
-              backgroundColor: ['#4D648D', '#D0E1F9'],
-              borderColor: '#4D648D',
-              fill: false
+            scales: {
+              xAxes: [{
+                display: true,
+                ticks: {
+                  fontColor: '#4D648D'
+              },
+              }],
+              yAxes: [{
+                display: true,
+                ticks: {
+                  beginAtZero: true,
+                  fontColor: '#4D648D',
+                  callback: function(label, index, labels) {
+                    return label + ' uur';
+                }
+              },
+              }],
             }
-          ]
-        },
-        options: {
-          legend: {
-            display: false,
+          }
+        });
+        this.deepchart = new Chart(ctxDeep, {
+          type: 'doughnut',
+          data: {
+            labels: ['Gemiddelde Uitgerustheid'],
+            datasets: [
+              {
+                data: [deepAvg, 5 - deepAvg],
+                backgroundColor: ['#4D648D', '#D0E1F9'],
+                borderColor: '#4D648D',
+                fill: false
+              }
+            ]
           },
-          elements: {
-              center: {
-              text: Math.round( deepAvg * 10 ) / 10,
-              color: '#4D648D', // Default black
-              sidePadding: 50 // Default 20 (as a percentage)
+          options: {
+            legend: {
+              display: false,
+            },
+            elements: {
+                center: {
+                text: Math.round( deepAvg * 10 ) / 10,
+                color: '#4D648D', // Default black
+                sidePadding: 50 // Default 20 (as a percentage)
+              }
             }
           }
-        }
-      });
-      this.restchart = new Chart(ctxRest, {
-        type: 'doughnut',
-        data: {
-          labels: ['Gemiddelde slaapdiepte'],
-          datasets: [
-            {
-              data: [restAvg, 5 - restAvg],
-              backgroundColor: ['#283655', '#D0E1F9'],
-              borderColor: '#283655',
-              fill: false
-            }
-          ]
-        },
-        options: {
-          legend: {
-            display: false,
+        });
+        this.restchart = new Chart(ctxRest, {
+          type: 'doughnut',
+          data: {
+            labels: ['Gemiddelde slaapdiepte'],
+            datasets: [
+              {
+                data: [restAvg, 5 - restAvg],
+                backgroundColor: ['#283655', '#D0E1F9'],
+                borderColor: '#283655',
+                fill: false
+              }
+            ]
           },
-          elements: {
-              center: {
-              text: Math.round( restAvg * 10 ) / 10,
-              color: '#4D648D', // Default black
-              sidePadding: 50 // Default 20 (as a percentage)
+          options: {
+            legend: {
+              display: false,
+            },
+            elements: {
+                center: {
+                text: Math.round( restAvg * 10 ) / 10,
+                color: '#4D648D', // Default black
+                sidePadding: 50 // Default 20 (as a percentage)
+              }
             }
           }
-        }
-      });
+        });
+      }
     }, err => {
       console.error(err);
     });
