@@ -2,8 +2,9 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { MatSidenav } from '@angular/material';
 import { SidenavService } from './services/sidenav-service.service';
-import { AuthService } from './services/auth.service';
 import { HeaderService } from './services/header.service';
+import { User } from './models/user';
+import { ProfileService } from './services/profile.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ import { HeaderService } from './services/header.service';
 })
 export class AppComponent implements OnInit {
   title = '';
-  currentUser: number;
+  currentUser;
 
   @ViewChild('sidenav') public sidenav: MatSidenav;
   showHead = false;
@@ -20,7 +21,7 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private sidenavService: SidenavService,
-    private authService: AuthService,
+    private profileService: ProfileService,
     private headerService: HeaderService
     ) {
 
@@ -39,11 +40,17 @@ export class AppComponent implements OnInit {
       }
     });
     this.sidenavService.setSidenav(this.sidenav);
-    this.currentUser = this.authService.getDecodedToken().data.user.id;
+    this.getCurrentUser();
     this.router.events.subscribe(event => {
       // close sidenav on routing
       this.sidenavService.close();
     });
 
+  }
+
+  getCurrentUser() {
+    this.profileService.getCurrentUser().subscribe(user => {
+      this.currentUser = user;
+    });
   }
 }
