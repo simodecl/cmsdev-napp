@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
   selectedFile: File;
   postSelfie: FormGroup;
   errors: String;
-  placeholderImg = '/assets/placeholder.jpg';
 
   constructor(
     private headerService: HeaderService,

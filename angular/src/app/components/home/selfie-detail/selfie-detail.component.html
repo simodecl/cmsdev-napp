@@ -10,7 +10,7 @@
     <div class="card-head">
       <div class="avatar-container">
           <img class="avatar" *ngIf="selfie._embedded.author[0].acf.avatar" [src]="selfie._embedded.author[0].acf.avatar.url" />
-          <img class="avatar" *ngIf="!selfie._embedded.author[0].acf.avatar" [src]="placeholderImg" />
+          <img class="avatar" *ngIf="!selfie._embedded.author[0].acf.avatar" src="assets/placeholder.jpg" />
       </div>
       <div class="card-author">
         {{ selfie._embedded.author[0].name }}
@@ -55,7 +55,7 @@
             <a [routerLink]="['/profile', comment._embedded.author[0].id]">
               <div class="avatar-container">
                 <img class="avatar" *ngIf="comment._embedded.author[0].acf.avatar" [src]="comment._embedded.author[0].acf.avatar.url" />
-                <img class="avatar" *ngIf="!comment._embedded.author[0].acf.avatar" [src]="placeholderImg" />
+                <img class="avatar" *ngIf="!comment._embedded.author[0].acf.avatar" src="assets/placeholder.jpg" />
               </div>
             </a>
             <div class="comment-main">
@@ -91,7 +91,7 @@
                   <a [routerLink]="['/profile', comment._embedded.author[0].id]">
                     <div class="avatar-container">
                       <img class="avatar" *ngIf="comment._embedded.author[0].acf.avatar" [src]="comment._embedded.author[0].acf.avatar.url" />
-                      <img class="avatar" *ngIf="!comment._embedded.author[0].acf.avatar" [src]="placeholderImg" />
+                      <img class="avatar" *ngIf="!comment._embedded.author[0].acf.avatar" src="assets/placeholder.jpg" />
                     </div>
                   </a>
                   <div class="comment-text">

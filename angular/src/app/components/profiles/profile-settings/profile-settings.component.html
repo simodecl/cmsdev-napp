@@ -2,7 +2,7 @@
   <div class="profile-head" *ngIf="user.acf">
     <div class="avatar-container">
       <img class="avatar" *ngIf="user.acf.avatar; else placeholder" src="{{user.acf.avatar.url}}" />
-      <ng-template #placeholder><img class="avatar" src="{{placeholderImg}}" /></ng-template>
+      <ng-template #placeholder><img class="avatar" src="assets/placeholder.jpg" /></ng-template>
     </div>
     <div class="profile-name">
       <h3 class="name">{{ user.name }}</h3>

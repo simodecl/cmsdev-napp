@@ -10,7 +10,7 @@
       <a [routerLink]="['/profile', profile.id]">
         <div class="avatar-container">
           <img class="avatar" *ngIf="profile.acf.avatar; else placeholder" [src]="profile.acf.avatar.url" />
-          <ng-template #placeholder><img class="avatar" [src]="placeholderImg" /></ng-template>
+          <ng-template #placeholder><img class="avatar" src="assets/placeholder.jpg" /></ng-template>
         </div>
       </a>
       <div class="profile-name">

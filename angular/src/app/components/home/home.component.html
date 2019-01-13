@@ -14,7 +14,7 @@
           <img class="avatar" [src]="selfie._embedded.author[0].acf.avatar.url" />
         </div>
         <div class="avatar-container" *ngIf="!selfie._embedded.author[0].acf.avatar">
-          <img class="avatar" [src]="placeholderImg" />
+          <img class="avatar" src="assets/placeholder.jpg" />
         </div>
         <div class="card-author">
           {{ selfie._embedded.author[0].name }}

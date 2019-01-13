@@ -23,8 +23,6 @@ export class SelfieDetailComponent implements OnInit {
   subcommentForm: FormGroup;
   showForm = false;
 
-  placeholderImg = '/assets/placeholder.jpg';
-
   constructor(
     private postService: PostService,
     private route: ActivatedRoute,

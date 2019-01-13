@@ -12,7 +12,6 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class RegisterComponent implements OnInit {
 
-  logoPath = '/assets/napp-logo-blue.png';
   registerForm: FormGroup;
   errors: string;
   token: null;

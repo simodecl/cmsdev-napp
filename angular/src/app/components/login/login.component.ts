@@ -9,8 +9,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  logoPath = '/assets/napp-logo-light.png';
   loginForm: FormGroup;
   errors: string;
   token: null;

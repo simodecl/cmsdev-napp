@@ -13,7 +13,6 @@ import { HeaderService } from 'src/app/services/header.service';
 export class ProfileSettingsComponent implements OnInit {
   selectedFile: File;
   fields: FormGroup;
-  placeholderImg = '/assets/placeholder.jpg';
   fieldsData;
   dateData;
   user: User;

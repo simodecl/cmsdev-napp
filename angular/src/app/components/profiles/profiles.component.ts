@@ -12,7 +12,6 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class ProfilesComponent implements OnInit {
   profiles: User[];
-  placeholderImg = '/assets/placeholder.jpg';
   currentUser: User;
   search: FormGroup;
 

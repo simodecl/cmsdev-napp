@@ -4,7 +4,7 @@
         <mat-icon>view_list</mat-icon>
         <a class="navLink" [routerLink]="['']">Tijdlijn</a>
       </div>
-      <div class="sidenav-item">
+      <div *ngIf="currentUser" class="sidenav-item">
         <mat-icon>person</mat-icon>
         <a class="navLink" [routerLink]="['/profile', currentUser.id]">Jouw profiel</a>
       </div>

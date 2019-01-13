@@ -13,7 +13,6 @@ import { HeaderService } from 'src/app/services/header.service';
 export class ProfileDetailComponent implements OnInit {
   profile: User;
   currentUser: User;
-  placeholderImg = '/assets/placeholder.jpg';
   dateString;
   dateParts;
   dateObject;

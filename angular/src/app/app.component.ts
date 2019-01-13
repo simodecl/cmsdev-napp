@@ -36,11 +36,11 @@ export class AppComponent implements OnInit {
           this.showHead = false;
         } else {
           this.showHead = true;
+          this.getCurrentUser();
         }
       }
     });
     this.sidenavService.setSidenav(this.sidenav);
-    this.getCurrentUser();
     this.router.events.subscribe(event => {
       // close sidenav on routing
       this.sidenavService.close();
